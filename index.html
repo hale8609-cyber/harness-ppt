@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>如何驾驭AI这匹烈马 · Harness 演讲PPT（三版本）</title>
+<title>如何驾驭AI这匹烈马 · Harness 演讲PPT（中英六版本）</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -14,8 +14,15 @@
     color:#e8fff5; padding:40px 20px;
   }
   h1 { font-size:clamp(22px,4vw,40px); text-align:center; color:#fff; margin-bottom:8px; }
-  .sub { color:#8fe3b5; font-size:clamp(13px,2vw,17px); margin-bottom:44px; text-align:center; }
-  .cards { display:flex; gap:26px; flex-wrap:wrap; justify-content:center; max-width:1100px; }
+  .sub { color:#8fe3b5; font-size:clamp(13px,2vw,17px); margin-bottom:36px; text-align:center; }
+  .section { width:100%; max-width:1100px; margin-bottom:38px; }
+  .sec-title {
+    display:flex; align-items:center; gap:14px; margin-bottom:16px;
+    font-size:clamp(15px,2vw,19px); font-weight:700; letter-spacing:1px;
+  }
+  .sec-title::before { content:""; width:8px; height:22px; border-radius:4px; background:linear-gradient(180deg,#7CFC9B,#00A651); box-shadow:0 0 12px rgba(0,230,118,.5); }
+  .sec-title .en-badge { font-size:12px; letter-spacing:2px; padding:3px 12px; border-radius:99px; background:rgba(0,229,255,.15); color:#5ce8ff; border:1px solid rgba(0,229,255,.45); }
+  .cards { display:flex; gap:26px; flex-wrap:wrap; justify-content:center; }
   .card {
     width:300px; border-radius:18px; padding:22px 20px 18px;
     background:rgba(255,255,255,.05); border:1px solid rgba(120,220,170,.35);
@@ -31,35 +38,67 @@
   .card h2 { font-size:19px; margin-bottom:8px; }
   .card p { font-size:13px; color:#b8e6cf; line-height:1.6; }
   .url { margin-top:10px; font-size:11px; color:#6fae8d; word-break:break-all; }
-  .note { margin-top:44px; font-size:12px; color:#5f8f76; text-align:center; line-height:1.8; }
+  .note { margin-top:30px; font-size:12px; color:#5f8f76; text-align:center; line-height:1.8; }
 </style>
 </head>
 <body>
   <h1>如何驾驭AI这匹烈马</h1>
-  <div class="sub">用 Harness 为 AI 编程构建专属工作系统 · 15 分钟技术演讲</div>
-  <div class="cards">
-    <a class="card" href="fs3/">
-      <img class="thumb" src="preview-fs3.png" alt="深绿科技版预览">
-      <span class="tag t1">深绿科技 · 版本一</span>
-      <h2>原版 · 恒生绿</h2>
-      <p>近黑深绿渐变底，恒生绿主色，简洁商务。适合正式场合。</p>
-      <div class="url">/fs3/</div>
-    </a>
-    <a class="card" href="cyber/">
-      <img class="thumb" src="preview-cyber.png" alt="科技炫酷版预览">
-      <span class="tag t2">科技炫酷 · 版本二</span>
-      <h2>Cyber · 霓虹粒子</h2>
-      <p>深蓝渐变 + 青色网格 + 粒子动画，Orbitron 字体，HUD 角标。适合极客氛围。</p>
-      <div class="url">/cyber/</div>
-    </a>
-    <a class="card" href="cartoon/">
-      <img class="thumb" src="preview-cartoon.png" alt="卡通版预览">
-      <span class="tag t3">卡通风 · 版本三</span>
-      <h2>Cartoon · 糖果贴纸</h2>
-      <p>奶油色暖底 + 云朵气球装饰，圆润手写字体，贴纸卡片。适合轻松场合。</p>
-      <div class="url">/cartoon/</div>
-    </a>
+  <div class="sub">用 Harness 为 AI 编程构建专属工作系统 · 15 分钟技术演讲 · 中英共六版本</div>
+
+  <div class="section">
+    <div class="sec-title">中文版</div>
+    <div class="cards">
+      <a class="card" href="fs3/">
+        <img class="thumb" src="preview-fs3.png" alt="深绿科技版预览">
+        <span class="tag t1">深绿科技 · 版本一</span>
+        <h2>原版 · 恒生绿</h2>
+        <p>近黑深绿渐变底，恒生绿主色，简洁商务。适合正式场合。</p>
+        <div class="url">/fs3/</div>
+      </a>
+      <a class="card" href="cyber/">
+        <img class="thumb" src="preview-cyber.png" alt="科技炫酷版预览">
+        <span class="tag t2">科技炫酷 · 版本二</span>
+        <h2>Cyber · 霓虹粒子</h2>
+        <p>深蓝渐变 + 青色网格 + 粒子动画，Orbitron 字体，HUD 角标。适合极客氛围。</p>
+        <div class="url">/cyber/</div>
+      </a>
+      <a class="card" href="cartoon/">
+        <img class="thumb" src="preview-cartoon.png" alt="卡通版预览">
+        <span class="tag t3">卡通风 · 版本三</span>
+        <h2>Cartoon · 糖果贴纸</h2>
+        <p>奶油色暖底 + 云朵气球装饰，圆润手写字体，贴纸卡片。适合轻松场合。</p>
+        <div class="url">/cartoon/</div>
+      </a>
+    </div>
   </div>
-  <div class="note">三版本内容完全一致（10页）· 操作：空格/方向键翻页 · F 全屏 · Ctrl+P 导出 PDF</div>
+
+  <div class="section">
+    <div class="sec-title">English <span class="en-badge">EN</span></div>
+    <div class="cards">
+      <a class="card" href="en/fs3/">
+        <img class="thumb" src="preview-en-fs3.png" alt="Deep Green English preview">
+        <span class="tag t1">Deep Green · v1</span>
+        <h2>Classic · HSBC Green</h2>
+        <p>Near-black green gradient, HSBC green accent, clean business look.</p>
+        <div class="url">/en/fs3/</div>
+      </a>
+      <a class="card" href="en/cyber/">
+        <img class="thumb" src="preview-en-cyber.png" alt="Cyber English preview">
+        <span class="tag t2">Cyber · v2</span>
+        <h2>Cyber · Neon Grid</h2>
+        <p>Deep blue grid, particles, Orbitron type, HUD corners. Geek vibe.</p>
+        <div class="url">/en/cyber/</div>
+      </a>
+      <a class="card" href="en/cartoon/">
+        <img class="thumb" src="preview-en-cartoon.png" alt="Cartoon English preview">
+        <span class="tag t3">Cartoon · v3</span>
+        <h2>Cartoon · Sticker Fun</h2>
+        <p>Cream background, clouds & balloons, rounded font, sticker cards.</p>
+        <div class="url">/en/cartoon/</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="note">六版本内容一致（10页）· 操作：空格/方向键翻页 · F 全屏 · Ctrl+P 导出 PDF</div>
 </body>
 </html>

@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project-Specific Harness · Taming the AI Stallion</title>
+<!-- 字体: 中文 Noto Sans SC（思源黑体），代码/英文 JetBrains Mono。禁用 Inter/Roboto/Arial/Space Grotesk -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   THEME TOKENS — 绿色系深色主题（恒生绿）
+   主色 #00A651 / #009B4C，辅以亮绿 #00E676、浅绿 #7CFC9B
+   =========================================== */
+:root {
+    --green:      #00A651;
+    --green-600:  #009B4C;
+    --green-700:  #007a3d;
+    --green-800:  #0c3d24;
+    --bright:     #00E676;
+    --light:      #7CFC9B;
+    --ink:        #eafff1;
+    --ink-dim:    #b6dcc2;
+    --ink-faint:  #7da88c;
+    --line:       rgba(0, 166, 81, 0.30);
+    --line-strong:rgba(0, 230, 118, 0.55);
+    --card:       rgba(0, 166, 81, 0.07);
+    --card-2:     rgba(0, 230, 118, 0.05);
+    --stage-bg:   #050b07;
+    --slide-bg:   #0a1410;
+
+    --font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Inter', 'Noto Sans SC', 'PingFang SC', monospace;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur: 0.7s;
+}
+
+/* ===========================================
+   BASE
+   =========================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* --- PASTE viewport-base.css CONTENTS HERE --- */
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+/* ===========================================
+   GLOBAL DECK CHROME（舞台之外）
+   =========================================== */
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--green-700), var(--bright));
+    z-index: 2000;
+    transition: width 0.4s ease;
+}
+.edit-hotzone {
+    position: fixed; top: 0; left: 0;
+    width: 80px; height: 80px;
+    z-index: 3000; cursor: pointer;
+}
+.edit-toggle {
+    position: fixed; top: 18px; left: 18px;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    border: 1px solid var(--line-strong);
+    background: rgba(6, 20, 12, 0.88);
+    color: var(--light);
+    font-size: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 3001; cursor: pointer;
+}
+.edit-toggle.show, .edit-toggle.active { opacity: 1; pointer-events: auto; }
+.editing [data-edit] {
+    outline: 1px dashed rgba(124, 252, 155, 0.55);
+    outline-offset: 4px; cursor: text; border-radius: 4px;
+}
+.editing .slide.active [data-edit]:focus {
+    outline-color: var(--bright);
+    background: rgba(0, 166, 81, 0.10);
+}
+
+/* ===========================================
+   SLIDE ATMOSPHERE — 深灰→深绿渐变 + 网格 + 暗角
+   =========================================== */
+.slide {
+    background:
+        radial-gradient(1150px 780px at 88% -8%, rgba(0, 166, 81, 0.17), transparent 62%),
+        radial-gradient(1000px 700px at 4% 108%, rgba(0, 230, 118, 0.10), transparent 55%),
+        linear-gradient(168deg, #0c1710 0%, #0a1410 42%, #0e2115 100%);
+}
+.slide::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 230, 118, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 230, 118, 0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none;
+}
+.slide::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 46%, transparent 58%, rgba(2, 8, 4, 0.55) 100%);
+    pointer-events: none;
+}
+.slide > * { position: relative; z-index: 1; }
+
+/* ===========================================
+   TYPOGRAPHY & SHARED COMPONENTS
+   =========================================== */
+body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 页面标题: 左侧绿色竖条 + 大标题 */
+.ptitle {
+    position: absolute;
+    top: 62px; left: 90px;
+    display: flex; align-items: center; gap: 24px;
+}
+.ptitle::before {
+    content: "";
+    width: 10px; height: 58px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, var(--light), var(--green));
+    box-shadow: 0 0 18px rgba(0, 230, 118, 0.45);
+}
+.ptitle h2 {
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--ink);
+}
+
+/* 页码 02/11 */
+.pagenum {
+    position: absolute;
+    right: 56px; bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: rgba(124, 252, 155, 0.55);
+    z-index: 5;
+}
+
+/* 底部引用条（💡 / ❌ / 👉 / 金句） */
+.quotebar {
+    position: absolute;
+    left: 80px; right: 80px; bottom: 48px;
+    height: 84px;
+    display: flex; align-items: center; gap: 18px;
+    padding: 0 36px;
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--green);
+    border-radius: 14px;
+    background: linear-gradient(90deg, rgba(0, 166, 81, 0.13), rgba(0, 166, 81, 0.03));
+    font-size: 30px;
+    color: var(--ink-dim);
+    letter-spacing: 1px;
+    z-index: 4;
+}
+.quotebar .mark { font-size: 34px; line-height: 1; }
+.quotebar .mono { font-family: var(--font-mono); font-weight: 700; color: var(--light); }
+/* P9 底部大字金句 */
+.quotebar.lg {
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--light);
+    height: 100px;
+    border-left: 6px solid var(--bright);
+    background: linear-gradient(90deg, rgba(0, 230, 118, 0.14), rgba(0, 166, 81, 0.04));
+    text-shadow: 0 0 30px rgba(0, 230, 118, 0.35);
+}
+
+/* 通用面板（HUD 四角括号装饰） */
+.panel {
+    position: relative;
+    border: 1px solid var(--line-strong);
+    border-radius: 20px;
+    background: linear-gradient(160deg, rgba(0, 166, 81, 0.10), rgba(0, 166, 81, 0.03));
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35), inset 0 0 40px rgba(0, 166, 81, 0.05);
+}
+.panel::before, .panel::after {
+    content: "";
+    position: absolute;
+    width: 26px; height: 26px;
+    border: 3px solid var(--bright);
+    opacity: 0.85;
+}
+.panel::before { top: -3px; left: -3px; border-right: none; border-bottom: none; border-top-left-radius: 16px; }
+.panel::after { bottom: -3px; right: -3px; border-left: none; border-top: none; border-bottom-right-radius: 16px; }
+
+/* 代码 / 英文 chip */
+.chip {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 22px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: rgba(0, 166, 81, 0.10);
+    color: var(--ink-dim);
+    font-size: 26px;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+}
+.chip-solid {
+    background: linear-gradient(160deg, var(--green-600), var(--green-700));
+    color: #eafff1;
+    border-color: rgba(124, 252, 155, 0.5);
+    box-shadow: 0 6px 22px rgba(0, 166, 81, 0.35);
+}
+code {
+    font-family: var(--font-mono);
+    color: var(--light);
+    background: rgba(0, 166, 81, 0.12);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 4px 14px;
+    font-size: 0.92em;
+}
+
+/* ===========================================
+   ANIMATIONS — 入场动画
+   =========================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity var(--dur) var(--ease-out-expo),
+                transform var(--dur) var(--ease-out-expo);
+    transition-delay: var(--d, 0s);
+}
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-48px);
+    transition: opacity var(--dur) var(--ease-out-expo),
+                transform var(--dur) var(--ease-out-expo);
+    transition-delay: var(--d, 0s);
+}
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.88);
+    transition: opacity 0.8s var(--ease-out-expo),
+                transform 0.8s var(--ease-out-expo);
+    transition-delay: var(--d, 0s);
+}
+.slide.visible .reveal,
+.slide.visible .reveal-left,
+.slide.visible .reveal-scale {
+    opacity: 1;
+    transform: none;
+}
+
+/* QA 截图辅助: 关闭所有过渡，强制终态 */
+html.no-anim *, html.no-anim *::before, html.no-anim *::after {
+    transition: none !important;
+    animation: none !important;
+}
+html.no-anim .reveal, html.no-anim .reveal-left, html.no-anim .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* ===========================================
+   P1 封面
+   =========================================== */
+.cover-wrap {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 34px;
+    text-align: center;
+}
+.cover-ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.cover-ring.ring-a {
+    width: 880px; height: 880px;
+    left: calc(50% - 440px); top: calc(50% - 440px);
+    border: 1px solid rgba(0, 230, 118, 0.22);
+    box-shadow: 0 0 90px rgba(0, 166, 81, 0.10), inset 0 0 90px rgba(0, 166, 81, 0.06);
+}
+.cover-ring.ring-b {
+    width: 1000px; height: 1000px;
+    left: calc(50% - 500px); top: calc(50% - 500px);
+    border: 1px dashed rgba(0, 166, 81, 0.16);
+}
+.cover-tag {
+    font-family: var(--font-mono);
+    font-size: 24px;
+    letter-spacing: 8px;
+    color: var(--light);
+    opacity: 0.9;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 10px 30px;
+    background: rgba(0, 166, 81, 0.10);
+}
+.cover-title {
+    font-size: 118px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: #ffffff;
+    text-shadow: 0 0 60px rgba(0, 230, 118, 0.30);
+    line-height: 1.15;
+}
+.cover-sub {
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: var(--green);
+}
+.cover-meta {
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--ink-faint);
+    margin-top: 18px;
+}
+.cover-meta .sep { color: var(--green); margin: 0 16px; }
+
+/* ===========================================
+   P2 三大痛点
+   =========================================== */
+.p2-cards {
+    position: absolute;
+    top: 226px; left: 90px;
+    width: 1740px;
+    display: flex; gap: 46px;
+}
+.pain-card {
+    flex: 1;
+    height: 500px;
+    padding: 46px 44px 40px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 22px;
+    background: linear-gradient(165deg, rgba(0, 166, 81, 0.10), rgba(0, 166, 81, 0.03));
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35), inset 0 0 30px rgba(0, 166, 81, 0.04);
+}
+.pain-icon {
+    font-size: 58px;
+    line-height: 1;
+    margin-bottom: 26px;
+    filter: drop-shadow(0 0 16px rgba(0, 230, 118, 0.35));
+}
+.pain-card h3 {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--light);
+    margin-bottom: 26px;
+}
+.pain-scene {
+    font-size: 30px;
+    line-height: 1.55;
+    color: var(--ink);
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: rgba(0, 166, 81, 0.09);
+    border: 1px dashed var(--line);
+    margin-bottom: auto;
+}
+.pain-essence {
+    margin-top: 26px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--ink-dim);
+    display: flex; align-items: center; gap: 12px;
+}
+.pain-essence .tag {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--green-600);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 3px 10px;
+    background: rgba(0, 166, 81, 0.10);
+}
+
+/* ===========================================
+   P3 什么是 Harness？左文右图
+   =========================================== */
+.p3-wrap {
+    position: absolute;
+    top: 236px; left: 110px;
+    width: 1700px; height: 630px;
+    display: flex; align-items: center; gap: 70px;
+}
+.p3-text {
+    width: 600px;
+    display: flex; flex-direction: column; gap: 46px;
+}
+.def-card {
+    padding: 36px 42px;
+    border: 1px solid var(--line-strong);
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(0, 166, 81, 0.10), rgba(0, 166, 81, 0.03));
+}
+.def-label {
+    font-family: var(--font-mono);
+    font-size: 26px;
+    letter-spacing: 4px;
+    color: var(--green);
+    margin-bottom: 16px;
+}
+.def-card p {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--ink);
+}
+.def-card p em { font-style: normal; color: var(--light); }
+.p3-art {
+    flex: 1;
+    height: 630px;
+    display: flex; align-items: center; justify-content: center;
+}
+.p3-art svg { height: 100%; width: auto; }
+
+/* ===========================================
+   P4 五个子系统 — 环形布局（节点与底部引用条保持安全间距）
+   =========================================== */
+.ring-wrap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1920px; height: 1080px;
+}
+.ring-svg {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 700px; height: 700px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.ring-center {
+    position: absolute;
+    left: calc(50% - 100px); top: calc(50% - 100px);
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    font-size: 40px; font-weight: 900; letter-spacing: 2px;
+    color: #04240f;
+    background: radial-gradient(circle at 32% 28%, var(--light), var(--green) 58%, var(--green-700));
+    box-shadow: 0 0 60px rgba(0, 230, 118, 0.55), 0 0 140px rgba(0, 166, 81, 0.35);
+    z-index: 3;
+}
+.ring-node {
+    position: absolute;
+    width: 250px; height: 132px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(0, 166, 81, 0.13), rgba(0, 166, 81, 0.04));
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.30);
+    z-index: 2;
+}
+.ring-node .rn-ico { font-size: 34px; line-height: 1; }
+.ring-node .rn-name { font-size: 30px; font-weight: 900; letter-spacing: 2px; color: var(--light); }
+.ring-node .rn-en { font-family: var(--font-mono); font-size: 18px; letter-spacing: 3px; color: var(--ink-dim); margin-top: 2px; }
+
+/* ===========================================
+   P5 通用 Harness 及其局限
+   =========================================== */
+.p5-col {
+    position: absolute;
+    top: 290px; left: 220px;
+    width: 1480px;
+    display: flex; flex-direction: column; align-items: center; gap: 30px;
+}
+.p5-upper, .p5-lower {
+    width: 1220px;
+    display: flex; flex-direction: column; align-items: center; gap: 26px;
+    padding: 46px 60px;
+}
+.p5-upper { min-height: 280px; }
+.p5-lower {
+    min-height: 210px;
+    border-width: 2px;
+    background: linear-gradient(160deg, rgba(0, 230, 118, 0.16), rgba(0, 166, 81, 0.05));
+    box-shadow: 0 20px 70px rgba(0, 166, 81, 0.22), inset 0 0 50px rgba(0, 230, 118, 0.06);
+}
+.p5-chiprow { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; justify-content: center; }
+.p5-line {
+    font-size: 34px; color: var(--ink); font-weight: 500; letter-spacing: 1px;
+}
+.p5-notsame {
+    font-size: 26px;
+    color: var(--light);
+    border-color: var(--line-strong);
+    background: rgba(0, 230, 118, 0.10);
+}
+.p5-lower .p5-line { font-size: 38px; font-weight: 700; }
+.p5-cta {
+    font-size: 32px; font-weight: 700;
+    color: var(--bright);
+    letter-spacing: 1px;
+}
+.flow-arrow {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--bright);
+    filter: drop-shadow(0 0 12px rgba(0, 230, 118, 0.6));
+}
+
+/* ===========================================
+   P6 构建专属 Harness — 三步垂直流程
+   =========================================== */
+.p6-flow {
+    position: absolute;
+    top: 70px; left: 110px;
+    width: 1700px; height: 1010px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 18px;
+}
+.step-card {
+    width: 1560px;
+    padding: 18px 48px 22px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 20px;
+    background: linear-gradient(165deg, rgba(0, 166, 81, 0.11), rgba(0, 166, 81, 0.03));
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 12px;
+}
+.step-tag {
+    font-family: var(--font-mono);
+    font-size: 20px; letter-spacing: 6px;
+    color: var(--green);
+}
+.step-card h3 { font-size: 34px; font-weight: 900; letter-spacing: 2px; color: var(--ink); }
+.step-card p { font-size: 26px; color: var(--ink-dim); line-height: 1.5; }
+.step-card .hl { color: var(--light); font-weight: 700; }
+.step-card .eq { font-family: var(--font-mono); color: var(--bright); margin: 0 6px; }
+
+.step2 { gap: 12px; padding-bottom: 22px; }
+.sub-row {
+    display: flex; gap: 26px; width: 100%;
+    justify-content: center;
+}
+.sub-card {
+    flex: 1; max-width: 460px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    border: 1px solid;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.sub-card .sc-name { font-size: 26px; font-weight: 900; letter-spacing: 1px; color: var(--ink); }
+.sub-card .sc-val {
+    font-family: var(--font-mono);
+    font-size: 22px; line-height: 1.5;
+    color: var(--ink-dim);
+    text-align: center;
+}
+.sub-card .sc-arrow { color: var(--bright); font-size: 22px; line-height: 1; }
+/* 三个子系统: 不同深浅的绿色 */
+.sc-deep   { background: rgba(0, 94, 51, 0.28);  border-color: rgba(0, 166, 81, 0.45); }
+.sc-mid    { background: rgba(0, 140, 74, 0.24); border-color: rgba(0, 200, 108, 0.55); }
+.sc-bright { background: rgba(0, 190, 104, 0.22); border-color: rgba(0, 230, 118, 0.65); }
+
+.step3 { border-width: 2px; background: linear-gradient(165deg, rgba(0, 230, 118, 0.15), rgba(0, 166, 81, 0.04)); }
+
+/* ===========================================
+   P7 核心流程 — 上下两部分: 外层 OpenSpec 生命周期 + 内层 TDD 循环
+   =========================================== */
+.p7-diagram {
+    position: absolute;
+    top: 150px; left: 80px;
+    width: 1760px; height: 780px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+}
+.p7-upper, .p7-lower {
+    width: 100%;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 22px;
+    background: linear-gradient(165deg, rgba(0, 166, 81, 0.10), rgba(0, 166, 81, 0.03));
+    padding: 28px 50px 32px;
+    display: flex; flex-direction: column; gap: 22px;
+}
+.p7-upper { height: 250px; }
+.p7-lower { height: 340px; }
+.p7-tag {
+    font-family: var(--font-mono);
+    font-size: 22px; letter-spacing: 3px;
+    color: var(--bright);
+    display: flex; align-items: center; gap: 12px;
+}
+.p7-tag::before {
+    content: ""; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--bright);
+    box-shadow: 0 0 12px rgba(0, 230, 118, 0.8);
+}
+.p7-flow {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px;
+}
+.p7-node {
+    height: 62px; padding: 0 26px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 999px;
+    background: linear-gradient(165deg, rgba(0, 166, 81, 0.16), rgba(0, 166, 81, 0.05));
+    font-size: 25px; font-weight: 700; letter-spacing: 1px;
+    color: var(--ink);
+    white-space: nowrap;
+    z-index: 1;
+}
+.p7-node .p7-opt { font-size: 17px; color: var(--ink-faint); font-weight: 500; }
+.p7-node.hl {
+    border-color: var(--bright);
+    background: linear-gradient(165deg, rgba(0, 230, 118, 0.30), rgba(0, 166, 81, 0.10));
+    color: var(--light);
+    box-shadow: 0 0 28px rgba(0, 230, 118, 0.35);
+}
+.p7-arr { color: var(--bright); font-family: var(--font-mono); font-size: 26px; flex: none; }
+.p7-connector {
+    flex: none;
+    height: 74px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px;
+}
+.p7-connector .cn-line {
+    width: 120px; height: 0;
+    border-top: 2px dashed rgba(0, 230, 118, 0.55);
+}
+.p7-connector .cn-arrow {
+    color: var(--bright);
+    filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.6));
+}
+.p7-connector .cn-tag {
+    font-family: var(--font-mono);
+    font-size: 20px; letter-spacing: 2px;
+    color: var(--ink-dim);
+    background: rgba(0, 166, 81, 0.10);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 18px;
+}
+.tdd-cycle {
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    font-family: var(--font-mono);
+}
+.tdd-chip {
+    padding: 14px 34px;
+    font-size: 30px; font-weight: 800; letter-spacing: 2px;
+    border-radius: 14px;
+    border: 2px solid var(--line-strong);
+    color: var(--light);
+}
+.tdd-chip.red { background: rgba(255, 90, 90, 0.13); border-color: rgba(255, 120, 120, 0.55); color: #ff9d9d; }
+.tdd-chip.green { background: rgba(0, 230, 118, 0.16); border-color: var(--bright); color: var(--light); box-shadow: 0 0 24px rgba(0, 230, 118, 0.30); }
+.tdd-chip.refactor { background: rgba(64, 196, 255, 0.12); border-color: rgba(64, 196, 255, 0.50); color: #8fd8ff; }
+.tdd-cycle .p7-arr { font-size: 28px; }
+.tdd-loop {
+    margin-left: 6px;
+    font-family: var(--font-mono);
+    font-size: 19px; letter-spacing: 2px;
+    color: var(--ink-dim);
+    border: 1px dashed var(--line);
+    border-radius: 999px;
+    padding: 6px 16px;
+    white-space: nowrap;
+}
+.tdd-note {
+    text-align: center;
+    font-size: 25px; color: var(--ink-dim);
+    letter-spacing: 1px; line-height: 1.7;
+}
+.tdd-note b { color: var(--light); font-weight: 700; }
+.tdd-note .nt-arr { color: var(--bright); font-family: var(--font-mono); margin: 0 8px; font-size: 23px; }
+
+/* ===========================================
+   P8 四步搭建
+   =========================================== */
+.p8-flow {
+    position: absolute;
+    top: 220px; left: 110px;
+    width: 1700px;
+    display: flex; flex-direction: column; gap: 40px;
+}
+.p8-row {
+    display: flex; align-items: center; gap: 40px;
+    padding: 24px 44px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 20px;
+    background: linear-gradient(165deg, rgba(0, 166, 81, 0.10), rgba(0, 166, 81, 0.03));
+}
+.p8-num {
+    flex: none;
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px; font-weight: 900;
+    color: #04240f;
+    background: radial-gradient(circle at 30% 25%, var(--light), var(--green) 62%, var(--green-700));
+    box-shadow: 0 0 26px rgba(0, 230, 118, 0.45);
+}
+.p8-body { flex: 1; }
+.p8-body h3 { font-size: 34px; font-weight: 900; letter-spacing: 2px; color: var(--ink); margin-bottom: 10px; }
+.p8-line {
+    display: flex; align-items: center; gap: 18px;
+    font-size: 27px; color: var(--ink-dim); line-height: 1.55;
+    flex-wrap: wrap;
+}
+.p8-line .tree {
+    font-family: var(--font-mono);
+    color: var(--light);
+    font-size: 25px;
+    line-height: 1.7;
+    background: rgba(0, 166, 81, 0.10);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 24px;
+    white-space: pre;
+}
+.p8-line .chain {
+    font-family: var(--font-mono);
+    font-size: 27px;
+    color: var(--bright);
+    letter-spacing: 1px;
+}
+.p8-line .sub { font-size: 24px; color: var(--ink-faint); font-family: var(--font-mono); }
+
+/* ===========================================
+   P9 总结
+   =========================================== */
+.p9-list {
+    position: absolute;
+    top: 226px; left: 170px;
+    width: 1580px;
+    display: flex; flex-direction: column; gap: 42px;
+}
+.p9-row {
+    display: flex; align-items: center; gap: 36px;
+    padding: 34px 46px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 20px;
+    background: linear-gradient(165deg, rgba(0, 166, 81, 0.10), rgba(0, 166, 81, 0.03));
+}
+.p9-ico {
+    flex: none;
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; font-weight: 900;
+    color: #04240f;
+    background: radial-gradient(circle at 30% 25%, var(--light), var(--green) 62%, var(--green-700));
+    box-shadow: 0 0 24px rgba(0, 230, 118, 0.45);
+}
+.p9-row p { font-size: 38px; color: var(--ink); line-height: 1.5; letter-spacing: 1px; }
+.p9-row p b { color: var(--light); font-weight: 900; margin-right: 18px; }
+
+/* ===========================================
+   P10 Q&A
+   =========================================== */
+.qa-wrap {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 40px;
+}
+.qa-ring {
+    position: absolute;
+    left: calc(50% - 360px); top: calc(50% - 360px);
+    width: 720px; height: 720px;
+    border: 2px solid rgba(0, 230, 118, 0.20);
+    border-radius: 50%;
+    box-shadow: 0 0 110px rgba(0, 166, 81, 0.14), inset 0 0 110px rgba(0, 166, 81, 0.08);
+    pointer-events: none;
+}
+.qa-ring::after {
+    content: "";
+    position: absolute; inset: 56px;
+    border: 1px dashed rgba(0, 166, 81, 0.35);
+    border-radius: 50%;
+}
+.qa-wrap h2 {
+    font-size: 150px; font-weight: 900; letter-spacing: 14px;
+    color: var(--ink);
+    text-shadow: 0 0 70px rgba(0, 230, 118, 0.35);
+    z-index: 1;
+}
+.qa-wrap p {
+    font-size: 42px; letter-spacing: 6px;
+    color: var(--green);
+    z-index: 1;
+}
+
+/* ===========================================
+   P11 Thank You
+   =========================================== */
+.ty-wrap {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 30px;
+    text-align: center;
+}
+.ty-wrap h2 {
+    font-size: 132px; font-weight: 900; letter-spacing: 10px;
+    color: #ffffff;
+    text-shadow: 0 0 70px rgba(0, 230, 118, 0.35);
+}
+.ty-wrap .ty-sub { font-size: 40px; letter-spacing: 8px; color: var(--ink-dim); }
+.ty-quote {
+    margin-top: 30px;
+    max-width: 1280px;
+    font-size: 46px; font-weight: 700; line-height: 1.6;
+    color: var(--light);
+    text-shadow: 0 0 34px rgba(0, 230, 118, 0.30);
+}
+.ty-quote .qmark {
+    font-family: var(--font-mono);
+    font-size: 74px; font-weight: 700;
+    color: var(--green);
+    vertical-align: -18px;
+    margin: 0 10px;
+}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage">
+
+    <!-- ============ P1 封面 ============ -->
+    <section class="slide" aria-label="Slide 1 of 10">
+        <div class="cover-wrap">
+            <div class="cover-ring ring-a reveal-scale" style="--d:.05s" aria-hidden="true"></div>
+            <div class="cover-ring ring-b reveal-scale" style="--d:.15s" aria-hidden="true"></div>
+            <h1 class="cover-title reveal" style="--d:.45s" data-edit>Taming the AI Stallion</h1>
+            <p class="cover-sub reveal" style="--d:.65s" data-edit>Build Your Own Harness for AI Coding</p>
+            <div class="cover-meta reveal" style="--d:.85s" data-edit>HSIL<span class="sep">｜</span>Hale Li<span class="sep">｜</span>14 Aug</div>
+        </div>
+        <div class="pagenum">01 / 10</div>
+    </section>
+
+    <!-- ============ P2 三大痛点 ============ -->
+    <section class="slide" aria-label="Slide 2 of 10">
+        <div class="ptitle reveal"><h2 data-edit>Coding with AI? Sound familiar?</h2></div>
+        <div class="p2-cards">
+            <article class="pain-card reveal" style="--d:.15s">
+                <div class="pain-icon" aria-hidden="true">🎲</div>
+                <h3 data-edit>Free Rein</h3>
+                <p class="pain-scene" data-edit>"Optimize it" — rewrote the whole module</p>
+                <div class="pain-essence"><span class="tag">ROOT</span><span data-edit>Misunderstood requirements</span></div>
+            </article>
+            <article class="pain-card reveal" style="--d:.30s">
+                <div class="pain-icon" aria-hidden="true">🔁</div>
+                <h3 data-edit>Whack-a-Mole</h3>
+                <p class="pain-scene" data-edit>"Fixed A, broke B"</p>
+                <div class="pain-essence"><span class="tag">ROOT</span><span data-edit>Zero process control</span></div>
+            </article>
+            <article class="pain-card reveal" style="--d:.45s">
+                <div class="pain-icon" aria-hidden="true">🤷</div>
+                <h3 data-edit>Empty Claims</h3>
+                <p class="pain-scene" data-edit>"AI says passed" — errors everywhere</p>
+                <div class="pain-essence"><span class="tag">ROOT</span><span data-edit>No acceptance criteria</span></div>
+            </article>
+        </div>
+        <div class="quotebar reveal" style="--d:.6s"><span class="mark">💡</span><span data-edit>It's not the model — it's missing the rules</span></div>
+        <div class="pagenum">02 / 10</div>
+    </section>
+
+    <!-- ============ P3 什么是 Harness？ ============ -->
+    <section class="slide" aria-label="Slide 3 of 10">
+        <div class="ptitle reveal"><h2 data-edit>What is a Harness?</h2></div>
+        <div class="p3-wrap">
+            <div class="p3-text">
+                <div class="def-card reveal" style="--d:.15s">
+                    <div class="def-label">DEFINITION</div>
+                    <p data-edit>Beyond model weights<em>all engineering infrastructure</em></p>
+                </div>
+                <div class="def-card reveal" style="--d:.30s">
+                    <div class="def-label">INTUITION</div>
+                    <p data-edit>The LLM is a<em>wild stallion</em>; the harness is the<em>reins</em></p>
+                </div>
+            </div>
+            <div class="p3-art reveal-scale" style="--d:.45s">
+                <!-- 内联 SVG: 绿色线条卡通「wild stallion与reins」 -->
+                <svg viewBox="0 0 920 760" role="img" aria-label="Line-art: a wild stallion with reins">
+                    <!-- 地面与草簇 -->
+                    <path d="M150 640 Q460 668 780 640" fill="none" stroke="#009B4C" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+                    <path d="M262 646 q -6 -22 -20 -26 M382 654 q -4 -18 -16 -20 M562 656 q -5 -16 -14 -18 M702 648 q -6 -20 -18 -24"
+                          fill="none" stroke="#00A651" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+                    <!-- 身体 -->
+                    <path d="M470 300 C560 260 640 280 700 320 C760 355 790 400 790 450 C790 520 740 560 660 560 C600 560 540 540 500 490 C460 440 440 380 470 300 Z"
+                          fill="rgba(0,166,81,0.06)" stroke="#00A651" stroke-width="6" stroke-linejoin="round"/>
+                    <!-- 头 -->
+                    <path d="M430 210 C380 180 320 195 285 250 C265 285 258 320 268 345 C278 365 305 372 330 362 C365 348 395 330 415 300 C435 265 440 235 430 210 Z"
+                          fill="rgba(0,166,81,0.06)" stroke="#00A651" stroke-width="6" stroke-linejoin="round"/>
+                    <!-- 耳朵 -->
+                    <path d="M385 205 Q 372 150 400 142 Q 410 168 408 190" fill="none" stroke="#00A651" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M415 195 Q 415 140 445 138 Q 445 168 432 195" fill="none" stroke="#00A651" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- 鬃毛 -->
+                    <path d="M430 205 Q 470 178 520 228 Q 562 272 584 306" fill="none" stroke="#009B4C" stroke-width="13" stroke-linecap="round" opacity="0.85"/>
+                    <path d="M452 212 l -10 -30 M482 232 l -6 -28 M514 254 l -2 -24" fill="none" stroke="#00E676" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+                    <!-- 眼睛 -->
+                    <circle cx="352" cy="262" r="13" fill="none" stroke="#7CFC9B" stroke-width="6"/>
+                    <circle cx="350" cy="260" r="4.5" fill="#00E676"/>
+                    <!-- 鼻孔与嘴 -->
+                    <path d="M276 318 q 10 8 22 6" fill="none" stroke="#00A651" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M296 352 Q 320 362 344 350" fill="none" stroke="#00A651" stroke-width="5" stroke-linecap="round"/>
+                    <!-- 笼头（辔头） -->
+                    <path d="M340 222 L 372 352" fill="none" stroke="#00A651" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="368" cy="340" r="11" fill="none" stroke="#7CFC9B" stroke-width="5"/>
+                    <!-- reins（双线，拉向右侧驭手） -->
+                    <path d="M368 340 C 430 420 560 470 700 500" fill="none" stroke="#00A651" stroke-width="7" stroke-linecap="round"/>
+                    <path d="M372 350 C 436 428 564 478 702 508" fill="none" stroke="#009B4C" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+                    <circle cx="712" cy="502" r="13" fill="none" stroke="#00E676" stroke-width="5"/>
+                    <circle cx="712" cy="502" r="4" fill="#00E676"/>
+                    <!-- 腿 -->
+                    <path d="M520 540 Q 515 585 512 630" fill="none" stroke="#00A651" stroke-width="14" stroke-linecap="round"/>
+                    <path d="M502 630 Q 512 640 524 630" fill="none" stroke="#009B4C" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M700 540 Q 706 585 710 632" fill="none" stroke="#00A651" stroke-width="14" stroke-linecap="round"/>
+                    <path d="M700 632 Q 710 642 722 632" fill="none" stroke="#009B4C" stroke-width="6" stroke-linecap="round"/>
+                    <!-- 尾巴 -->
+                    <path d="M785 420 Q 820 430 830 470 Q 838 500 822 540" fill="none" stroke="#00A651" stroke-width="11" stroke-linecap="round"/>
+                    <path d="M800 452 Q 826 458 830 486 M 812 500 Q 828 510 824 534" fill="none" stroke="#009B4C" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+                    <!-- 星光点缀 -->
+                    <path d="M150 148 h 30 M165 133 v 30" stroke="#7CFC9B" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M820 168 h 26 M833 155 v 26" stroke="#00E676" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+                    <circle cx="640" cy="132" r="7" fill="#7CFC9B"/>
+                    <circle cx="238" cy="470" r="6" fill="#00E676" opacity="0.8"/>
+                </svg>
+            </div>
+        </div>
+        <div class="quotebar reveal" style="--d:.6s"><span class="mark">💡</span><span data-edit>A harness doesn't make AI smarter — it makes AI work better</span></div>
+        <div class="pagenum">03 / 10</div>
+    </section>
+
+    <!-- ============ P4 五个子系统 — 环形 ============ -->
+    <section class="slide" aria-label="Slide 4 of 10">
+        <div class="ptitle reveal"><h2 data-edit>The Five Subsystems</h2></div>
+        <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 700 700" aria-hidden="true">
+                <circle cx="350" cy="350" r="300" fill="none" stroke="rgba(0,230,118,0.35)" stroke-width="2" stroke-dasharray="10 12"/>
+                <circle cx="350" cy="350" r="300" fill="none" stroke="rgba(0,166,81,0.10)" stroke-width="46"/>
+                <g stroke="rgba(0,230,118,0.30)" stroke-width="2" stroke-dasharray="4 10">
+                    <line x1="350" y1="350" x2="350" y2="50"/>
+                    <line x1="350" y1="350" x2="65" y2="257"/>
+                    <line x1="350" y1="350" x2="174" y2="593"/>
+                    <line x1="350" y1="350" x2="526" y2="593"/>
+                    <line x1="350" y1="350" x2="635" y2="257"/>
+                </g>
+                <circle cx="350" cy="350" r="10" fill="#00E676"/>
+            </svg>
+            <div class="ring-center reveal-scale" style="--d:.2s" data-edit>AI Agent</div>
+            <div class="ring-node reveal" style="--d:.15s; left:835px; top:175px;">
+                <div class="rn-ico" aria-hidden="true">📜</div>
+                <div class="rn-name" data-edit>Instruction</div>
+                <div class="rn-en">INSTRUCTION</div>
+            </div>
+            <div class="ring-node reveal" style="--d:.25s; left:550px; top:381px;">
+                <div class="rn-ico" aria-hidden="true">🧰</div>
+                <div class="rn-name" data-edit>Tool</div>
+                <div class="rn-en">TOOL</div>
+            </div>
+            <div class="ring-node reveal" style="--d:.35s; left:659px; top:717px;">
+                <div class="rn-ico" aria-hidden="true">🌱</div>
+                <div class="rn-name" data-edit>Environment</div>
+                <div class="rn-en">ENVIRONMENT</div>
+            </div>
+            <div class="ring-node reveal" style="--d:.45s; left:1011px; top:717px;">
+                <div class="rn-ico" aria-hidden="true">📊</div>
+                <div class="rn-name" data-edit>State</div>
+                <div class="rn-en">STATE</div>
+            </div>
+            <div class="ring-node reveal" style="--d:.55s; left:1120px; top:381px;">
+                <div class="rn-ico" aria-hidden="true">🔁</div>
+                <div class="rn-name" data-edit>Feedback</div>
+                <div class="rn-en">FEEDBACK</div>
+            </div>
+        </div>
+        <div class="pagenum">04 / 10</div>
+    </section>
+
+    <!-- ============ P5 通用 Harness 及其局限 ============ -->
+    <section class="slide" aria-label="Slide 5 of 10">
+        <div class="ptitle reveal"><h2 data-edit>From Universal Reins to a Custom Harness</h2></div>
+        <div class="p5-col">
+            <div class="p5-upper panel reveal" style="--d:.15s">
+                <div class="p5-chiprow">
+                    <span class="chip chip-solid">GitHub Copilot</span>
+                    <span class="chip chip-solid">OpenCode</span>
+                    <span class="chip">= Universal Harness</span>
+                </div>
+                <p class="p5-line" data-edit>Provides general software engineering</p>
+                <div class="chip p5-notsame" data-edit>Universal ≠ Custom</div>
+            </div>
+            <div class="flow-arrow reveal" style="--d:.35s" aria-hidden="true">
+                <svg width="64" height="46" viewBox="0 0 64 46"><path d="M32 2 L32 36 M32 36 L14 22 M32 36 L50 22" fill="none" stroke="#00E676" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="p5-lower panel reveal" style="--d:.50s">
+                <p class="p5-line" data-edit>We build custom subsystems on top</p>
+                <div class="p5-cta" data-edit>👉 Make the harness fit OUR project</div>
+            </div>
+        </div>
+        <div class="pagenum">05 / 10</div>
+    </section>
+
+    <!-- ============ P6 构建专属 Harness ============ -->
+    <section class="slide" aria-label="Slide 6 of 10">
+        <div class="ptitle reveal"><h2 data-edit>Build a Custom Harness</h2></div>
+        <div class="p6-flow">
+            <div class="step-card reveal" style="--d:.10s">
+                <div class="step-tag">STEP 1</div>
+                <h3 data-edit>Universal harness as the base</h3>
+                <p data-edit>GitHub Copilot / OpenCode provide general software engineering</p>
+            </div>
+            <div class="flow-arrow reveal" style="--d:.20s" aria-hidden="true">
+                <svg width="44" height="30" viewBox="0 0 44 30"><path d="M22 2 L22 22 M22 22 L10 12 M22 22 L34 12" fill="none" stroke="#00E676" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-card step2 reveal" style="--d:.30s">
+                <div class="step-tag">STEP 2</div>
+                <h3 data-edit>Strengthen 3 subsystems</h3>
+                <div class="sub-row">
+                    <div class="sub-card sc-deep">
+                        <div class="sc-name" data-edit>Environment</div>
+                        <div class="sc-arrow">→</div>
+                        <div class="sc-val" data-edit>project-glossary + project-knowledge</div>
+                    </div>
+                    <div class="sub-card sc-mid">
+                        <div class="sc-name" data-edit>State</div>
+                        <div class="sc-arrow">→</div>
+                        <div class="sc-val" data-edit>OpenSpec (change mgmt + task breakdown)</div>
+                    </div>
+                    <div class="sub-card sc-bright">
+                        <div class="sc-name" data-edit>Feedback</div>
+                        <div class="sc-arrow">→</div>
+                        <div class="sc-val" data-edit>TDD</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flow-arrow reveal" style="--d:.40s" aria-hidden="true">
+                <svg width="44" height="30" viewBox="0 0 44 30"><path d="M22 2 L22 22 M22 22 L10 12 M22 22 L34 12" fill="none" stroke="#00E676" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="step-card step3 reveal" style="--d:.50s">
+                <div class="step-tag">STEP 3</div>
+                <h3 data-edit>A project-specific harness</h3>
+                <p><span data-edit>Universal base + 3 subsystems</span><span class="eq">=</span><span class="hl" data-edit>project-specific harness</span></p>
+            </div>
+        </div>
+        <div class="pagenum">06 / 10</div>
+    </section>
+
+    <!-- ============ P7 核心流程 — 双层嵌套运转模型 ============ -->
+    <section class="slide" aria-label="Slide 7 of 10">
+        <div class="ptitle reveal"><h2 data-edit>Core Flow — the Dual-Layer Model</h2></div>
+        <div class="p7-diagram">
+            <!-- 上部分: OpenSpec 生命周期 -->
+            <div class="p7-upper reveal" style="--d:.10s">
+                <div class="p7-tag" data-edit>OUTER · OpenSpec lifecycle</div>
+                <div class="p7-flow">
+                    <div class="p7-node"><span class="p7-opt">(optional)</span>&nbsp;explore</div>
+                    <div class="p7-arr">→</div>
+                    <div class="p7-node">proposal</div>
+                    <div class="p7-arr">→</div>
+                    <div class="p7-node">specs</div>
+                    <div class="p7-arr">→</div>
+                    <div class="p7-node">design</div>
+                    <div class="p7-arr">→</div>
+                    <div class="p7-node">tasks</div>
+                    <div class="p7-arr">→</div>
+                    <div class="p7-node hl">apply</div>
+                    <div class="p7-arr">→</div>
+                    <div class="p7-node">archive</div>
+                </div>
+            </div>
+            <!-- 连接器: inside apply -->
+            <div class="p7-connector" aria-hidden="true">
+                <span class="cn-line"></span>
+                <span class="cn-arrow">
+                    <svg width="34" height="34" viewBox="0 0 34 34"><path d="M17 3 L17 24 M17 24 L9 16 M17 24 L25 16" fill="none" stroke="#00E676" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="cn-tag">inside apply</span>
+                <span class="cn-arrow">
+                    <svg width="34" height="34" viewBox="0 0 34 34"><path d="M17 3 L17 24 M17 24 L9 16 M17 24 L25 16" fill="none" stroke="#00E676" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="cn-line"></span>
+            </div>
+            <!-- 下部分: TDD 循环 -->
+            <div class="p7-lower reveal" style="--d:.30s">
+                <div class="p7-tag" data-edit>INNER · TDD loop (inside apply)</div>
+                <div class="tdd-cycle">
+                    <span class="tdd-chip red" data-edit>Red</span>
+                    <span class="p7-arr">→</span>
+                    <span class="tdd-chip green" data-edit>Green</span>
+                    <span class="p7-arr">→</span>
+                    <span class="tdd-chip refactor" data-edit>Refactor</span>
+                </div>
+                <div class="tdd-note">
+                    <b data-edit>Each atomic task runs independently</b>: 
+                    <span data-edit>write a failing test</span><span class="nt-arr">→</span>
+                    <span data-edit>make it pass</span><span class="nt-arr">→</span>
+                    <span data-edit>refactor & regression-test</span>
+                </div>
+            </div>
+        </div>
+        <div class="quotebar reveal" style="--d:.78s"><span class="mark">💡</span><span data-edit>OpenSpec runs the flow, TDD guards the quality</span></div>
+        <div class="pagenum">07 / 10</div>
+    </section>
+
+    <!-- ============ P8 4步搭建专属 Harness ============ -->
+    <section class="slide" aria-label="Slide 8 of 10">
+        <div class="ptitle reveal"><h2 data-edit>Build a Custom Harness in 4 Steps</h2></div>
+        <div class="p8-flow">
+            <div class="p8-row reveal" style="--d:.10s">
+                <div class="p8-num" aria-hidden="true">①</div>
+                <div class="p8-body">
+                    <h3 data-edit>Init OpenSpec</h3>
+                    <div class="p8-line"><code>openspec init</code><span data-edit>Set up the spec-driven process</span></div>
+                </div>
+            </div>
+            <div class="p8-row reveal" style="--d:.20s">
+                <div class="p8-num" aria-hidden="true">②</div>
+                <div class="p8-body">
+                    <h3 data-edit>Adopt the TDD Spec Schema</h3>
+                    <div class="p8-line"><span data-edit>Auto test scaffolding per change — test-first is a mandatory step</span></div>
+                </div>
+            </div>
+            <div class="p8-row reveal" style="--d:.30s">
+                <div class="p8-num" aria-hidden="true">③</div>
+                <div class="p8-body">
+                    <h3 data-edit>Inject project-specific Skills</h3>
+                    <div class="p8-line">
+                        <span class="tree">├── Glossary → Instruction subsystem
+└── Knowledge (ADRs & pitfalls) → State subsystem</span>
+                    </div>
+                </div>
+            </div>
+            <div class="p8-row reveal" style="--d:.40s">
+                <div class="p8-num" aria-hidden="true">④</div>
+                <div class="p8-body">
+                    <h3 data-edit>Run your first change</h3>
+                    <div class="p8-line">
+                        <span class="chain" data-edit>/opsx:propose → apply → archive</span>
+                        <span class="sub" data-edit>propose expands: proposal → specs → design → tasks</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagenum">08 / 10</div>
+    </section>
+
+    <!-- ============ P9 Q&A ============ -->
+    <section class="slide" aria-label="Slide 9 of 10">
+        <div class="qa-wrap">
+            <div class="qa-ring reveal-scale" style="--d:.1s" aria-hidden="true"></div>
+            <h2 class="reveal-scale" style="--d:.25s" data-edit>Q&amp;A</h2>
+            <p class="reveal" style="--d:.45s" data-edit>Questions welcome</p>
+        </div>
+        <div class="pagenum">09 / 10</div>
+    </section>
+
+    <!-- ============ P10 Thank You ============ -->
+    <section class="slide" aria-label="Slide 10 of 10">
+        <div class="ty-wrap">
+            <h2 class="reveal" style="--d:.15s" data-edit>Thank You</h2>
+            <p class="ty-sub reveal" style="--d:.35s" data-edit>Thanks for listening</p>
+            <div class="ty-quote reveal" style="--d:.55s">
+                <span class="qmark">“</span>💡 <span data-edit>Don't make AI guess your project — make AI live in it</span><span class="qmark">”</span>
+            </div>
+        </div>
+        <div class="pagenum">10 / 10</div>
+    </section>
+
+</main>
+</div>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="edit-hotzone" title="编辑模式 (E)"></div>
+<button class="edit-toggle" id="editToggle" aria-label="Toggle edit mode">✏️</button>
+
+<script>
+/* ===========================================
+   SLIDE PRESENTATION CONTROLLER
+   固定 1920×1080 舞台 + 键盘/触屏/滚轮导航 + 进度条 + 内联编辑
+   =========================================== */
+(function () {
+    const stage = document.getElementById('deckStage');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progress = document.getElementById('progress');
+    let current = 0;
+    let editing = false;
+
+    /* 整舞台等比缩放（16:9 固定，不做重排） */
+    const scale = () => {
+        const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+        const x = (window.innerWidth - 1920 * factor) / 2;
+        const y = (window.innerHeight - 1080 * factor) / 2;
+        stage.style.transform = 'translate(' + x + 'px, ' + y + 'px) scale(' + factor + ')';
+    };
+
+    const show = (i) => {
+        current = Math.max(0, Math.min(i, slides.length - 1));
+        slides.forEach((s, idx) => {
+            s.classList.toggle('active', idx === current);
+            s.classList.toggle('visible', idx === current);
+        });
+        progress.style.width = ((current + 1) / slides.length * 100) + '%';
+        attachEditable();
+    };
+    const next = () => show(current + 1);
+    const prev = () => show(current - 1);
+
+    window.addEventListener('resize', scale);
+
+    /* 键盘: ← → ↑ ↓ 空格 PageUp/PageDown Home/End · F 全屏 · E 编辑 */
+    document.addEventListener('keydown', (e) => {
+        const target = e.target;
+        if (target && target.getAttribute && target.getAttribute('contenteditable') === 'true') {
+            if (e.key === 'Escape') target.blur();
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); exportHtml(); }
+            return;
+        }
+        switch (e.key) {
+            case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+                e.preventDefault(); next(); break;
+            case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+                e.preventDefault(); prev(); break;
+            case 'Home': e.preventDefault(); show(0); break;
+            case 'End': e.preventDefault(); show(slides.length - 1); break;
+            case 'f': case 'F': toggleFullscreen(); break;
+            case 'e': case 'E': toggleEdit(); break;
+        }
+    });
+
+    /* 触屏滑动 */
+    let touchX = 0, touchY = 0;
+    stage.addEventListener('touchstart', (e) => {
+        touchX = e.changedTouches[0].clientX;
+        touchY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    stage.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchX;
+        const dy = e.changedTouches[0].clientY - touchY;
+        if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+            if (dx < 0) next(); else prev();
+        }
+    }, { passive: true });
+
+    /* 滚轮翻页（节流） */
+    let lastWheel = 0;
+    window.addEventListener('wheel', (e) => {
+        const now = Date.now();
+        if (now - lastWheel < 900 || Math.abs(e.deltaY) < 10) return;
+        lastWheel = now;
+        if (e.deltaY > 0) next(); else prev();
+    }, { passive: true });
+
+    /* 点击区域: 左 1/3 上一页，右 1/3 下一页 */
+    stage.addEventListener('click', (e) => {
+        if (editing) return;
+        const r = stage.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        if (x > 0.68) next();
+        else if (x < 0.32) prev();
+    });
+
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+            if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+        } else if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    };
+
+    /* 内联编辑: E 键 / 左上热区悬停 / Ctrl+S 导出当前 HTML */
+    const editBtn = document.getElementById('editToggle');
+    let hideTimer = null;
+    const toggleEdit = () => {
+        editing = !editing;
+        document.body.classList.toggle('editing', editing);
+        editBtn.classList.toggle('active', editing);
+        editBtn.classList.add('show');
+        attachEditable();
+    };
+    const attachEditable = () => {
+        slides.forEach((s) => {
+            const active = s.classList.contains('active');
+            s.querySelectorAll('[data-edit]').forEach((el) => {
+                el.contentEditable = (editing && active) ? 'true' : 'false';
+            });
+        });
+    };
+    const exportHtml = () => {
+        const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'harness-ppt-fs3.html';
+        a.click();
+        URL.revokeObjectURL(a.href);
+    };
+    const hotzone = document.querySelector('.edit-hotzone');
+    hotzone.addEventListener('mouseenter', () => { clearTimeout(hideTimer); editBtn.classList.add('show'); });
+    hotzone.addEventListener('mouseleave', () => {
+        hideTimer = setTimeout(() => { if (!editing) editBtn.classList.remove('show'); }, 400);
+    });
+    editBtn.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    editBtn.addEventListener('mouseleave', () => {
+        hideTimer = setTimeout(() => { if (!editing) editBtn.classList.remove('show'); }, 400);
+    });
+    editBtn.addEventListener('click', () => { if (editBtn.classList.contains('show')) toggleEdit(); });
+
+    scale();
+    show(0);
+
+    /* QA/调试钩子 */
+    window.__deck = {
+        show: show, next: next, prev: prev,
+        get slideCount() { return slides.length; },
+        get current() { return current; }
+    };
+})();
+</script>
+</body>
+</html>
