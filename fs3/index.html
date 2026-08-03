@@ -741,17 +741,19 @@ html.no-anim .reveal, html.no-anim .reveal-left, html.no-anim .reveal-scale {
     gap: 14px;
 }
 .p7-node {
-    height: 62px; padding: 0 26px;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
+    height: 88px; padding: 0 24px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
     border: 1.5px solid var(--line-strong);
-    border-radius: 999px;
+    border-radius: 18px;
     background: linear-gradient(165deg, rgba(0, 166, 81, 0.16), rgba(0, 166, 81, 0.05));
-    font-size: 25px; font-weight: 700; letter-spacing: 1px;
     color: var(--ink);
     white-space: nowrap;
     z-index: 1;
 }
-.p7-node .p7-opt { font-size: 17px; color: var(--ink-faint); font-weight: 500; }
+.p7-node .p7-term { font-size: 25px; font-weight: 700; letter-spacing: 1px; line-height: 1.1; }
+.p7-node .p7-zh { font-size: 15px; color: var(--ink-faint); font-weight: 500; letter-spacing: 2px; line-height: 1.1; }
+.p7-node.hl .p7-zh { color: rgba(0, 230, 118, 0.75); }
 .p7-node.hl {
     border-color: var(--bright);
     background: linear-gradient(165deg, rgba(0, 230, 118, 0.30), rgba(0, 166, 81, 0.10));
@@ -1195,19 +1197,19 @@ html.no-anim .reveal, html.no-anim .reveal-left, html.no-anim .reveal-scale {
             <div class="p7-upper reveal" style="--d:.10s">
                 <div class="p7-tag" data-edit>外层 · OpenSpec 生命周期</div>
                 <div class="p7-flow">
-                    <div class="p7-node"><span class="p7-opt">(可选)</span>&nbsp;explore</div>
+                    <div class="p7-node"><span class="p7-term">explore</span><span class="p7-zh">探索 · 可选</span></div>
                     <div class="p7-arr">→</div>
-                    <div class="p7-node">proposal</div>
+                    <div class="p7-node"><span class="p7-term">proposal</span><span class="p7-zh">提案</span></div>
                     <div class="p7-arr">→</div>
-                    <div class="p7-node">specs</div>
+                    <div class="p7-node"><span class="p7-term">specs</span><span class="p7-zh">规格说明</span></div>
                     <div class="p7-arr">→</div>
-                    <div class="p7-node">design</div>
+                    <div class="p7-node"><span class="p7-term">design</span><span class="p7-zh">设计</span></div>
                     <div class="p7-arr">→</div>
-                    <div class="p7-node">tasks</div>
+                    <div class="p7-node"><span class="p7-term">tasks</span><span class="p7-zh">任务拆解</span></div>
                     <div class="p7-arr">→</div>
-                    <div class="p7-node hl">apply</div>
+                    <div class="p7-node hl"><span class="p7-term">apply</span><span class="p7-zh">应用变更</span></div>
                     <div class="p7-arr">→</div>
-                    <div class="p7-node">archive</div>
+                    <div class="p7-node"><span class="p7-term">archive</span><span class="p7-zh">归档</span></div>
                 </div>
             </div>
             <!-- 连接器：apply 内部 -->
