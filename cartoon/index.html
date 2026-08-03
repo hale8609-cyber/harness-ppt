@@ -133,7 +133,7 @@ html,body{background:#F3EAD3;overflow:hidden;font-family:'ZCOOL KuaiLe','Baloo 2
 #p7 .hlab{text-align:center;font-size:28px;margin-bottom:26px}
 #p7 .hlab .pill{display:inline-block;background:var(--blue);color:#fff;border:3px solid var(--ink);border-radius:16px;padding:2px 20px}
 #p7 .chain{display:flex;justify-content:center;align-items:center;gap:0}
-#p7 .ch{width:200px;height:72px;display:flex;align-items:center;justify-content:center;gap:4px;font-size:23px;font-weight:800;background:#fff;border:3.5px solid var(--ink);border-radius:18px;box-shadow:4px 5px 0 var(--ink)}
+#p7 .ch{width:200px;height:94px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:23px;font-weight:800;background:#fff;border:3.5px solid var(--ink);border-radius:18px;box-shadow:4px 5px 0 var(--ink)}#p7 .ch small{font-size:13px;font-weight:600;opacity:.65}
 #p7 .ch.hot{background:var(--orange);color:#fff}
 #p7 .ch.opt{border-style:dashed;opacity:.8}
 #p7 .arrow{width:46px;text-align:center;font-size:26px;font-weight:800}
@@ -286,7 +286,7 @@ html,body{background:#F3EAD3;overflow:hidden;font-family:'ZCOOL KuaiLe','Baloo 2
         <div class="subs">
           <div class="sub">🌱 环境子系统 → <b>project-glossary + project-knowledge</b></div>
           <div class="sub">📊 状态子系统 → <b>OpenSpec（Change 管理 + task breakdown）</b></div>
-          <div class="sub">🔁 反馈子系统 → <b>TDD</b></div>
+          <div class="sub">🔁 反馈子系统 → <b>TDD（Test Driven Development）</b></div>
         </div>
       </div></div>
       <div class="step card"><div class="num">STEP<br>3</div><div class="body"><h4>形成项目级专属 Harness</h4><p class="formula">通用底座 + 3个子系统 = 项目级专属 Harness</p></div></div>
@@ -299,18 +299,18 @@ html,body{background:#F3EAD3;overflow:hidden;font-family:'ZCOOL KuaiLe','Baloo 2
     <div class="halfup">
       <div class="hlab"><span class="pill">外层 · OpenSpec 生命周期</span></div>
       <div class="chain">
-        <div class="ch opt">explore<span style="font-size:13px">(可选)</span></div><span class="arrow">→</span>
-        <div class="ch">proposal</div><span class="arrow">→</span>
-        <div class="ch">specs</div><span class="arrow">→</span>
-        <div class="ch">design</div><span class="arrow">→</span>
-        <div class="ch">tasks</div><span class="arrow">→</span>
-        <div class="ch hot">apply</div><span class="arrow">→</span>
-        <div class="ch">archive</div>
+        <div class="ch opt">explore<small>探索 · 可选</small></div><span class="arrow">→</span>
+        <div class="ch">proposal<small>提案</small></div><span class="arrow">→</span>
+        <div class="ch">specs<small>规格说明</small></div><span class="arrow">→</span>
+        <div class="ch">design<small>设计</small></div><span class="arrow">→</span>
+        <div class="ch">tasks<small>任务拆解</small></div><span class="arrow">→</span>
+        <div class="ch hot">apply<small>应用变更</small></div><span class="arrow">→</span>
+        <div class="ch">archive<small>归档</small></div>
       </div>
     </div>
     <div class="connector"><span class="apply-tag">apply 内部</span></div>
     <div class="halfdown">
-      <div class="hlab"><span class="pill" style="background:var(--orange)">内层 · TDD 循环（apply 内部）</span></div>
+      <div class="hlab"><span class="pill" style="background:var(--orange)">内层 · TDD（Test Driven Development）循环（apply 内部）</span></div>
       <div class="tdd">
         <div class="td red"><span class="big">RED</span><small>编写失败测试</small></div>
         <span class="cycle">➡️</span>
@@ -320,7 +320,7 @@ html,body{background:#F3EAD3;overflow:hidden;font-family:'ZCOOL KuaiLe','Baloo 2
       </div>
       <div class="tddnote">每个原子任务独立执行：<b>编写失败测试</b> → <b>编写代码使测试通过</b> → <b>重构并做回归测试</b></div>
     </div>
-    <div class="quote">💡 OpenSpec 管流程，<span class="em">TDD 管质量</span></div>
+    <div class="quote">💡 OpenSpec 管流程，<span class="em">TDD（Test Driven Development）管质量</span></div>
   </section>
 
   <!-- P8 四步 -->
