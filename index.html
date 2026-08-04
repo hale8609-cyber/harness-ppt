@@ -10,7 +10,7 @@
 <style>
 :root{
   --bg1:#030712; --bg2:#081426; --bg3:#0D1F3C;
-  --cyan:#00E5FF; --blue:#2E7CF6; --violet:#8B5CF6; --green:#00FFAA;
+  --cyan:#00E5FF; --blue:#2E7CF6; --violet:#8B5CF6; --green:#00FFAA; --amber:#FFC24B;
   --txt:#DCE9FF; --sub:#7E9BC0; --dim:#4A6385;
   --card:rgba(13,31,60,.55); --line:rgba(0,229,255,.28);
 }
@@ -84,29 +84,36 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p3 .pc .ess .tag{border-color:rgba(0,255,170,.4);color:var(--green)}
 #p3 .quote{position:absolute;bottom:96px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
 #p3 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
-/* ============ P4 五子系统 ============ */
-#p4 .planet{position:absolute;left:calc(50% - 165px);top:265px;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#1d4468 0%,#0d2238 45%,#071523 78%,#04101c 100%);box-shadow:0 0 70px rgba(0,229,255,.3),0 0 150px rgba(0,229,255,.14),inset -26px -22px 60px rgba(0,0,0,.55);z-index:2}
-#p4 .planet::before{content:"";position:absolute;inset:-60px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.13),rgba(0,229,255,.04) 45%,transparent 68%);z-index:-1}
-#p4 .planet-ring{position:absolute;left:calc(50% - 285px);top:374px;width:570px;height:186px;border:2px solid rgba(0,229,255,.32);border-radius:50%;transform:rotate(-16deg);box-shadow:0 0 26px rgba(0,229,255,.14)}
-#p4 .planet-ring.back{z-index:1}
-#p4 .planet-ring.front{z-index:3;clip-path:inset(52% 0 0 0);border-color:rgba(0,229,255,.45);filter:drop-shadow(0 0 10px rgba(0,229,255,.25))}
-#p4 .orbit{position:absolute;left:calc(50% - 525px);top:120px;width:1050px;height:620px;border:1px solid rgba(0,229,255,.15);border-radius:50%;z-index:0}
-#p4 .orbit2{position:absolute;left:calc(50% - 625px);top:70px;width:1250px;height:720px;border:1px solid rgba(0,229,255,.08);border-radius:50%;z-index:0}
-#p4 .core{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:2}
-#p4 .core::before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.16),transparent 65%);z-index:-1}
-#p4 .core-ic{width:54px;height:54px;filter:drop-shadow(0 0 12px rgba(0,229,255,.65))}
-#p4 .core .t1{font-size:23px;font-weight:900;color:#fff;letter-spacing:2px}
-#p4 .core .t2{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:4px;color:var(--cyan)}
-#p4 .hnode{position:absolute;width:200px;text-align:center;transform:translate(-50%,-50%);z-index:2}
-#p4 .hnode .sat{width:64px;height:64px;margin-bottom:6px;filter:drop-shadow(0 0 10px rgba(0,229,255,.55))}
-#p4 .hnode .cn{font-size:25px;font-weight:900;color:#fff;letter-spacing:2px;text-shadow:0 0 22px rgba(0,229,255,.45)}
-#p4 .hnode .en{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;color:var(--cyan);margin-top:2px}
-#p4 .hnode .desc{margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,229,255,.16);font-size:10.5px;line-height:1.5;color:var(--sub)}
-#p4 .n1{left:470px;top:315px}
-#p4 .n2{left:448px;top:518px}
-#p4 .n3{left:960px;top:688px}
-#p4 .n4{left:1472px;top:518px}
-#p4 .n5{left:1450px;top:315px}
+/* ============ P4 五子系统介绍 ============ */
+#p4 .s5{position:absolute;top:206px;left:0;width:100%;display:flex;justify-content:center;gap:42px}
+#p4 .s5card{position:relative;width:320px;height:626px;padding:30px 26px 26px;display:flex;flex-direction:column;align-items:center;background:var(--card);border:1px solid var(--line);backdrop-filter:blur(6px);box-shadow:0 0 34px rgba(0,229,255,.07),inset 0 0 44px rgba(0,229,255,.04);clip-path:polygon(22px 0,100% 0,100% calc(100% - 22px),calc(100% - 22px) 100%,0 100%,0 22px)}
+#p4 .s5num{position:absolute;top:16px;left:22px;font-family:'Orbitron',sans-serif;font-size:17px;font-weight:700;letter-spacing:2px;opacity:.9}
+#p4 .s5ic{width:86px;height:86px;margin-top:36px}
+#p4 .s5cn{margin-top:18px;font-size:28px;font-weight:900;color:#fff;letter-spacing:3px;text-shadow:0 0 22px rgba(0,229,255,.4)}
+#p4 .s5en{margin-top:5px;font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:4px;color:var(--cyan)}
+#p4 .s5line{width:120px;height:2px;margin:18px 0 16px}
+#p4 .s5role{font-size:24px;font-weight:700;color:#fff;letter-spacing:1px}
+#p4 .s5role b{font-style:normal}
+#p4 .s5desc{margin-top:14px;font-size:14.5px;line-height:1.8;color:var(--sub);text-align:center}
+#p4 .s5ex{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.5px;line-height:1.7;color:var(--dim);text-align:center}
+#p4 .s5tag{margin-top:auto;font-family:'Orbitron',sans-serif;font-size:12.5px;letter-spacing:2px;padding:7px 16px;border:1px solid rgba(0,255,170,.45);color:var(--green);background:rgba(0,255,170,.08)}
+#p4 .s5tag.base{border-color:rgba(122,145,180,.5);color:#93B4DC;background:rgba(122,145,180,.1)}
+/* accent per card */
+#p4 .s5card.c1 .s5num,#p4 .s5card.c1 .s5en,#p4 .s5card.c1 .s5role b{color:var(--cyan)}
+#p4 .s5card.c2 .s5num,#p4 .s5card.c2 .s5en,#p4 .s5card.c2 .s5role b{color:var(--blue)}
+#p4 .s5card.c3 .s5num,#p4 .s5card.c3 .s5en,#p4 .s5card.c3 .s5role b{color:var(--green)}
+#p4 .s5card.c4 .s5num,#p4 .s5card.c4 .s5en,#p4 .s5card.c4 .s5role b{color:var(--violet)}
+#p4 .s5card.c5 .s5num,#p4 .s5card.c5 .s5en,#p4 .s5card.c5 .s5role b{color:var(--amber)}
+#p4 .s5card.c1 .s5ic{filter:drop-shadow(0 0 14px rgba(0,229,255,.5))}
+#p4 .s5card.c2 .s5ic{filter:drop-shadow(0 0 14px rgba(46,124,246,.5))}
+#p4 .s5card.c3 .s5ic{filter:drop-shadow(0 0 14px rgba(0,255,170,.5))}
+#p4 .s5card.c4 .s5ic{filter:drop-shadow(0 0 14px rgba(139,92,246,.5))}
+#p4 .s5card.c5 .s5ic{filter:drop-shadow(0 0 14px rgba(255,194,75,.5))}
+#p4 .s5card.c1 .s5line{background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+#p4 .s5card.c2 .s5line{background:linear-gradient(90deg,transparent,var(--blue),transparent)}
+#p4 .s5card.c3 .s5line{background:linear-gradient(90deg,transparent,var(--green),transparent)}
+#p4 .s5card.c4 .s5line{background:linear-gradient(90deg,transparent,var(--violet),transparent)}
+#p4 .s5card.c5 .s5line{background:linear-gradient(90deg,transparent,var(--amber),transparent)}
 #p4 .note{position:absolute;bottom:84px;left:0;width:100%;text-align:center;font-size:22px;color:var(--sub);letter-spacing:2px}
 #p4 .note em{font-style:normal;color:var(--cyan);font-weight:700;text-shadow:0 0 18px rgba(0,229,255,.5)}
 /* ============ P5 通用 Harness ↔ 子系统映射 ============ *//* ============ P5 通用 Harness ↔ 子系统映射 ============ */
@@ -251,48 +258,60 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
     <div class="quote">💡 这不是模型不够强，是缺了一套<span class="em">“管住它的规矩”</span></div>
   </section>
 
-  <!-- P4 五子系统（并行协作，非循环） -->
+  <!-- P4 五子系统介绍（5卡片） -->
   <section class="slide" id="p4">
     <div class="ptitle"><h2>Harness 五个子系统</h2><div class="gline"></div></div>
-    <div class="orbit"></div><div class="orbit2"></div>
-    <div class="planet-ring back"></div>
-    <div class="planet">
-      <div class="core">
-        <svg class="core-ic" viewBox="0 0 64 64">
-          <rect x="15" y="21" width="34" height="28" rx="9" fill="none" stroke="#00E5FF" stroke-width="2.6"/>
-          <circle cx="26" cy="35" r="3" fill="#00E5FF"/>
-          <circle cx="38" cy="35" r="3" fill="#00E5FF"/>
-          <path d="M21 21 v-7 a11 11 0 0 1 22 0 v7" fill="none" stroke="#00E5FF" stroke-width="2.6"/>
-          <path d="M15 29 h-6 M49 29 h6" stroke="#00E5FF" stroke-width="2.6" stroke-linecap="round"/>
-        </svg>
-        <div class="t1">AI 智能体</div><div class="t2">AGENT CORE</div>
+    <div class="s5">
+      <div class="s5card c1">
+        <div class="s5num">01</div>
+        <svg class="s5ic" viewBox="0 0 48 48"><rect x="5" y="9" width="38" height="30" rx="5" fill="rgba(0,229,255,.06)" stroke="#00E5FF" stroke-width="2.2"/><path d="M5 17 h38" stroke="#00E5FF" stroke-width="2.2" opacity=".45"/><circle cx="10.5" cy="13" r="1.6" fill="#00E5FF"/><circle cx="16" cy="13" r="1.6" fill="#00E5FF" opacity=".65"/><path d="M13 24 l7 6 -7 6" fill="none" stroke="#00E5FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 33 h10" stroke="#00E5FF" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <div class="s5cn">指令子系统</div><div class="s5en">INSTRUCTION</div>
+        <div class="s5line"></div>
+        <div class="s5role">管 <b>「做什么」</b></div>
+        <div class="s5desc">系统提示词与工作流规范，<br>约束 AI 的行为边界与输出格式</div>
+        <div class="s5ex">system prompt · 工作流规范</div>
+        <div class="s5tag base">⚙ 基础能力</div>
       </div>
-    </div>
-    <div class="planet-ring front"></div>
-    <div class="hnode n1">
-      <svg class="sat" viewBox="0 0 48 48"><rect x="2" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M4 20 h5 M4 25 h5 M4 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><rect x="37" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M39 20 h5 M39 25 h5 M39 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><path d="M11 25 h4 M33 25 h4" stroke="#00E5FF" stroke-width="2"/><rect x="13" y="12" width="22" height="26" rx="5" fill="rgba(0,229,255,.07)" stroke="#00E5FF" stroke-width="2.2"/><path d="M24 12 v-5" stroke="#00E5FF" stroke-width="2"/><circle cx="24" cy="5.5" r="2.2" fill="#00E5FF"/><rect x="19" y="18" width="10" height="14" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="2"/><path d="M21.5 22.5 h5 M21.5 26.5 h5" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/></svg>
-      <div class="cn">指令子系统</div><div class="en">INSTRUCTION</div>
-      <div class="desc">告诉 AI 做什么、<br>按什么规矩做</div>
-    </div>
-    <div class="hnode n2">
-      <svg class="sat" viewBox="0 0 48 48"><rect x="2" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M4 20 h5 M4 25 h5 M4 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><rect x="37" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M39 20 h5 M39 25 h5 M39 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><path d="M11 25 h4 M33 25 h4" stroke="#00E5FF" stroke-width="2"/><rect x="13" y="12" width="22" height="26" rx="5" fill="rgba(0,229,255,.07)" stroke="#00E5FF" stroke-width="2.2"/><path d="M24 12 v-5" stroke="#00E5FF" stroke-width="2"/><circle cx="24" cy="5.5" r="2.2" fill="#00E5FF"/><circle cx="24" cy="25" r="4" fill="rgba(0,229,255,.25)" stroke="#00E5FF" stroke-width="1.8"/><path d="M24 19.4 v-2 M24 30.6 v2 M18.4 25 h-2 M29.6 25 h2 M20.4 20.4 l-1.4 -1.4 M27.6 29.6 l1.4 1.4 M27.6 20.4 l1.4 -1.4 M20.4 29.6 l-1.4 1.4" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/></svg>
-      <div class="cn">工具子系统</div><div class="en">TOOL</div>
-      <div class="desc">给 AI 能用的工具：<br>终端、编译器、测试框架</div>
-    </div>
-    <div class="hnode n3">
-      <svg class="sat" viewBox="0 0 48 48"><rect x="2" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M4 20 h5 M4 25 h5 M4 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><rect x="37" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M39 20 h5 M39 25 h5 M39 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><path d="M11 25 h4 M33 25 h4" stroke="#00E5FF" stroke-width="2"/><rect x="13" y="12" width="22" height="26" rx="5" fill="rgba(0,229,255,.07)" stroke="#00E5FF" stroke-width="2.2"/><path d="M24 12 v-5" stroke="#00E5FF" stroke-width="2"/><circle cx="24" cy="5.5" r="2.2" fill="#00E5FF"/><path d="M29 19 C21 21 17 27 17 33 c6 0 13-4 13-14 Z" fill="rgba(0,229,255,.18)" stroke="#00E5FF" stroke-width="2"/><path d="M20 31 c3.5-4.5 6.5-7 8.5-9.5" stroke="#00E5FF" stroke-width="1.6" stroke-linecap="round"/></svg>
-      <div class="cn">环境子系统</div><div class="en">ENVIRONMENT</div>
-      <div class="desc">让 AI 懂项目：<br>术语表、代码结构、架构知识</div>
-    </div>
-    <div class="hnode n4">
-      <svg class="sat" viewBox="0 0 48 48"><rect x="2" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M4 20 h5 M4 25 h5 M4 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><rect x="37" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M39 20 h5 M39 25 h5 M39 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><path d="M11 25 h4 M33 25 h4" stroke="#00E5FF" stroke-width="2"/><rect x="13" y="12" width="22" height="26" rx="5" fill="rgba(0,229,255,.07)" stroke="#00E5FF" stroke-width="2.2"/><path d="M24 12 v-5" stroke="#00E5FF" stroke-width="2"/><circle cx="24" cy="5.5" r="2.2" fill="#00E5FF"/><path d="M19.5 33.5 h9" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round"/><rect x="20.5" y="26" width="3" height="7" rx="1" fill="#00E5FF"/><rect x="25" y="20.5" width="3" height="12.5" rx="1" fill="#00E5FF"/><rect x="29.5" y="28.5" width="3" height="4.5" rx="1" fill="#00E5FF"/></svg>
-      <div class="cn">状态子系统</div><div class="en">STATE</div>
-      <div class="desc">记录干到哪一步、改了什么，<br>全程可追溯</div>
-    </div>
-    <div class="hnode n5">
-      <svg class="sat" viewBox="0 0 48 48"><rect x="2" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M4 20 h5 M4 25 h5 M4 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><rect x="37" y="15" width="9" height="20" rx="1.5" fill="none" stroke="#00E5FF" stroke-width="1.8"/><path d="M39 20 h5 M39 25 h5 M39 30 h5" stroke="#00E5FF" stroke-width="1.1" opacity=".55"/><path d="M11 25 h4 M33 25 h4" stroke="#00E5FF" stroke-width="2"/><rect x="13" y="12" width="22" height="26" rx="5" fill="rgba(0,229,255,.07)" stroke="#00E5FF" stroke-width="2.2"/><path d="M24 12 v-5" stroke="#00E5FF" stroke-width="2"/><circle cx="24" cy="5.5" r="2.2" fill="#00E5FF"/><path d="M29.5 20.5 a7.5 7.5 0 1 0 2.5 6.5" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round"/><path d="M29.5 18.5 v4.5 h4.5" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div class="cn">反馈子系统</div><div class="en">FEEDBACK</div>
-      <div class="desc">测试验证，<br>判定「是否完成」的唯一依据</div>
+      <div class="s5card c2">
+        <div class="s5num">02</div>
+        <svg class="s5ic" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9.5" fill="rgba(46,124,246,.1)" stroke="#2E7CF6" stroke-width="2.4"/><circle cx="24" cy="24" r="3" fill="#2E7CF6"/><path d="M24 4.5 v9 M24 34.5 v9 M4.5 24 h9 M34.5 24 h9" stroke="#2E7CF6" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <div class="s5cn">工具子系统</div><div class="s5en">TOOL</div>
+        <div class="s5line"></div>
+        <div class="s5role">管 <b>「用什么」</b></div>
+        <div class="s5desc">终端、编译器、测试框架，<br>让 AI 拥有可执行的能力</div>
+        <div class="s5ex">terminal · compiler · test</div>
+        <div class="s5tag base">⚙ 基础能力</div>
+      </div>
+      <div class="s5card c3">
+        <div class="s5num">03</div>
+        <svg class="s5ic" viewBox="0 0 48 48"><path d="M31 17 C21 19 16 26.5 16 34 c7.5 0 15.5-5.5 15.5-17 Z" fill="rgba(0,255,170,.1)" stroke="#00FFAA" stroke-width="2.2"/><path d="M19 31.5 c3.5-4.5 7-7.5 10-10" stroke="#00FFAA" stroke-width="1.8" stroke-linecap="round"/><path d="M24 34 v7" stroke="#00FFAA" stroke-width="2.2" stroke-linecap="round"/><path d="M20.5 41 h7 M22.5 38.5 h3" stroke="#00FFAA" stroke-width="2" stroke-linecap="round"/></svg>
+        <div class="s5cn">环境子系统</div><div class="s5en">ENVIRONMENT</div>
+        <div class="s5line"></div>
+        <div class="s5role">管 <b>「懂什么」</b></div>
+        <div class="s5desc">术语表、代码结构、架构知识，<br>让 AI 真正懂你的项目</div>
+        <div class="s5ex">project-glossary · project-knowledge</div>
+        <div class="s5tag">✅ 解决「自由发挥」</div>
+      </div>
+      <div class="s5card c4">
+        <div class="s5num">04</div>
+        <svg class="s5ic" viewBox="0 0 48 48"><rect x="9" y="21" width="7" height="15" rx="1.5" fill="rgba(139,92,246,.22)" stroke="#8B5CF6" stroke-width="2"/><rect x="20.5" y="12" width="7" height="24" rx="1.5" fill="rgba(139,92,246,.22)" stroke="#8B5CF6" stroke-width="2"/><rect x="32" y="26" width="7" height="10" rx="1.5" fill="rgba(139,92,246,.22)" stroke="#8B5CF6" stroke-width="2"/><path d="M5.5 40 h37" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round"/><path d="M9 31 l11.5-7 11.5 5 7-3" fill="none" stroke="#8B5CF6" stroke-width="1.8" stroke-linecap="round" opacity=".75"/></svg>
+        <div class="s5cn">状态子系统</div><div class="s5en">STATE</div>
+        <div class="s5line"></div>
+        <div class="s5role">管 <b>「记什么」</b></div>
+        <div class="s5desc">记录干到哪一步、改了什么，<br>全程可追溯</div>
+        <div class="s5ex">OpenSpec Change 管理 · task breakdown</div>
+        <div class="s5tag">✅ 解决「来回折腾」</div>
+      </div>
+      <div class="s5card c5">
+        <div class="s5num">05</div>
+        <svg class="s5ic" viewBox="0 0 48 48"><path d="M38 24 a14 14 0 1 1 -5-10.6" fill="none" stroke="#FFC24B" stroke-width="2.6" stroke-linecap="round"/><path d="M38 8.5 v8.5 h-8.5" fill="none" stroke="#FFC24B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 25 l5 5 8.5-9" fill="none" stroke="#FFC24B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="s5cn">反馈子系统</div><div class="s5en">FEEDBACK</div>
+        <div class="s5line"></div>
+        <div class="s5role">管 <b>「判什么」</b></div>
+        <div class="s5desc">测试验证，<br>判定「是否完成」的唯一依据</div>
+        <div class="s5ex">TDD · test · regression</div>
+        <div class="s5tag">✅ 解决「说了不算」</div>
+      </div>
     </div>
     <div class="note">五个子系统<em>并行协作</em>，共同构成完整 Harness</div>
   </section>
