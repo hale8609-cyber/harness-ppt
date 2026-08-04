@@ -85,7 +85,9 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p3 .quote{position:absolute;bottom:96px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
 #p3 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P4 五子系统 ============ */
-#p4 .rings{position:absolute;left:calc(50% - 170px);top:calc(50% - 170px);width:340px;height:340px}
+#p4 .rings{position:absolute;left:calc(50% - 170px);top:165px;width:340px;height:340px}
+#p4 .rings::before{content:"";position:absolute;inset:-90px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.16),rgba(0,229,255,.05) 45%,transparent 70%);z-index:-1}
+#p4 .rings::after{content:"";position:absolute;left:50%;top:100%;width:560px;height:340px;transform:translateX(-50%);background:linear-gradient(180deg,rgba(0,229,255,.14),rgba(0,229,255,.03) 55%,transparent);clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);z-index:-1;filter:blur(2px)}
 #p4 .ring{position:absolute;border-radius:50%}
 #p4 .ring.r1{inset:0;border:1.5px solid rgba(0,229,255,.55);box-shadow:0 0 26px rgba(0,229,255,.2),inset 0 0 26px rgba(0,229,255,.12)}
 #p4 .ring.r2{inset:26px;border:1.5px dashed rgba(0,229,255,.38)}
@@ -95,16 +97,16 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p4 .core-ic{width:54px;height:54px;filter:drop-shadow(0 0 12px rgba(0,229,255,.65))}
 #p4 .core .t1{font-size:23px;font-weight:900;color:#fff;letter-spacing:2px}
 #p4 .core .t2{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:4px;color:var(--cyan)}
-#p4 .hnode{position:absolute;width:280px;text-align:center;transform:translate(-50%,-50%);z-index:2}
-#p4 .hnode .hic{width:44px;height:44px;margin-bottom:4px;filter:drop-shadow(0 0 10px rgba(0,229,255,.5))}
-#p4 .hnode .cn{font-size:26px;font-weight:900;color:#fff;letter-spacing:2px;text-shadow:0 0 22px rgba(0,229,255,.45)}
-#p4 .hnode .en{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:3px;color:var(--cyan);margin-top:2px}
-#p4 .hnode .desc{margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,229,255,.16);font-size:11.5px;line-height:1.5;color:var(--sub)}
-#p4 .n1{left:960px;top:240px}
-#p4 .n2{left:1245px;top:447px}
-#p4 .n3{left:1136px;top:783px}
-#p4 .n4{left:784px;top:783px}
-#p4 .n5{left:675px;top:447px}
+#p4 .hnode{position:absolute;width:200px;text-align:center;transform:translate(-50%,-50%);z-index:2}
+#p4 .hnode .hic{width:40px;height:40px;margin-bottom:4px;filter:drop-shadow(0 0 10px rgba(0,229,255,.5))}
+#p4 .hnode .cn{font-size:23px;font-weight:900;color:#fff;letter-spacing:2px;text-shadow:0 0 22px rgba(0,229,255,.45)}
+#p4 .hnode .en{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;color:var(--cyan);margin-top:2px}
+#p4 .hnode .desc{margin-top:6px;padding-top:6px;border-top:1px solid rgba(0,229,255,.16);font-size:10.5px;line-height:1.5;color:var(--sub)}
+#p4 .n1{left:474px;top:640px}
+#p4 .n2{left:677px;top:750px}
+#p4 .n3{left:960px;top:800px}
+#p4 .n4{left:1243px;top:750px}
+#p4 .n5{left:1446px;top:640px}
 #p4 svg.spokes{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none;z-index:1}
 #p4 svg.spokes line{stroke:rgba(0,229,255,.35);stroke-width:1.6;stroke-dasharray:5 6}
 #p4 .note{position:absolute;bottom:84px;left:0;width:100%;text-align:center;font-size:22px;color:var(--sub);letter-spacing:2px}
@@ -255,11 +257,11 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
   <section class="slide" id="p4">
     <div class="ptitle"><h2>Harness 五个子系统</h2><div class="gline"></div></div>
     <svg class="spokes">
-      <line x1="960" y1="405" x2="960" y2="240"/>
-      <line x1="1088" y1="498" x2="1245" y2="447"/>
-      <line x1="1039" y1="649" x2="1136" y2="783"/>
-      <line x1="881" y1="649" x2="784" y2="783"/>
-      <line x1="832" y1="498" x2="675" y2="447"/>
+      <line x1="474" y1="640" x2="613" y2="542"/>
+      <line x1="677" y1="750" x2="768" y2="606"/>
+      <line x1="960" y1="800" x2="960" y2="470"/>
+      <line x1="1243" y1="750" x2="1152" y2="606"/>
+      <line x1="1446" y1="640" x2="1307" y2="542"/>
     </svg>
     <div class="rings">
       <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
