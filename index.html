@@ -16,7 +16,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-serif;color:var(--txt)}
-#stage{position:relative;width:1920px;height:1080px;margin:0 auto;background:radial-gradient(ellipse 90% 70% at 50% 0%,var(--bg3) 0%,var(--bg2) 45%,var(--bg1) 100%)}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;background:radial-gradient(ellipse 90% 70% at 50% 0%,var(--bg3) 0%,var(--bg2) 45%,var(--bg1) 100%)}
 /* grid overlay */
 #grid{position:absolute;inset:0;pointer-events:none;opacity:.5;
   background-image:linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);
@@ -52,7 +52,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p1 .title{position:absolute;top:300px;left:0;width:100%;text-align:center}
 #p1 h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:84px;line-height:1.18;letter-spacing:5px;color:#fff;text-shadow:0 0 60px rgba(0,229,255,.55)}
 #p1 h1 .hl{background:linear-gradient(120deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
-#p1 .sub{margin-top:30px;font-size:30px;font-weight:300;letter-spacing:6px;color:var(--cyan);text-shadow:0 0 26px rgba(0,229,255,.5)}
+#p1 .sub{margin-top:30px;font-size:30px;font-weight:300;letter-spacing:6px;color:var(--cyan);text-shadow:0 0 26px rgba(0,229,255,.5);display:inline-block;text-align:left;position:relative;left:100px}
 #p1 .meta{position:absolute;top:700px;left:0;width:100%;display:flex;justify-content:center;gap:60px;font-family:'Orbitron',sans-serif;font-size:20px;letter-spacing:4px;color:var(--sub)}
 #p1 .meta span{color:var(--cyan)}
 #p1 .sys{position:absolute;top:830px;left:0;width:100%;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:6px;color:var(--dim)}
@@ -61,11 +61,12 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p2 .def{margin-bottom:36px}
 #p2 .def .lab{font-family:'Orbitron',sans-serif;font-size:15px;letter-spacing:4px;color:var(--cyan);margin-bottom:14px}
 #p2 .def .big{font-size:40px;font-weight:700;color:#fff;line-height:1.5}
-#p2 .def .big em{font-style:normal;background:linear-gradient(120deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+#p2 .def .big em{font-style:normal;background:linear-gradient(120deg,var(--cyan),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
 #p2 .rcol{position:absolute;right:100px;top:200px;width:760px;height:640px}
 #p2 .hudpanel{position:absolute;inset:0;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;
   background:radial-gradient(circle,rgba(0,229,255,.08),transparent 60%);box-shadow:0 0 60px rgba(0,229,255,.12),inset 0 0 80px rgba(0,229,255,.06)}
 #p2 .hudpanel .horse{font-size:150px;filter:drop-shadow(0 0 30px rgba(0,229,255,.5))}
+#p2 .horse-svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 26px rgba(0,255,170,.28))}
 #p2 .reign{position:absolute;inset:-14px;pointer-events:none}
 #p2 .reign path{stroke:var(--green);stroke-width:5;fill:none;stroke-linecap:round;filter:drop-shadow(0 0 10px rgba(0,255,170,.7));stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 2.6s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
@@ -84,9 +85,11 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p3 .quote{position:absolute;bottom:96px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
 #p3 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P4 五子系统 ============ */
-#p4 .hub{position:absolute;left:calc(50% - 150px);top:calc(50% - 150px);width:300px;height:300px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+#p4 .hub{position:absolute;left:calc(50% - 150px);top:calc(50% - 150px);width:300px;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
   background:radial-gradient(circle at 35% 30%,rgba(0,255,170,.35),rgba(0,229,255,.12) 60%,rgba(13,31,60,.9));
-  border:2px solid var(--green);box-shadow:0 0 70px rgba(0,255,170,.5),inset 0 0 50px rgba(0,255,170,.15)}
+  border:2px solid var(--green);box-shadow:0 0 70px rgba(0,255,170,.5),inset 0 0 50px rgba(0,255,170,.15);
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+#p4 .hub::after{content:"";position:absolute;inset:12px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);border:1px dashed rgba(0,229,255,.4);pointer-events:none}
 #p4 .hub .t1{font-size:34px;font-weight:900;color:#fff;letter-spacing:3px}
 #p4 .hub .t2{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:4px;color:var(--green)}
 #p4 .node{position:absolute;width:330px;padding:20px 16px;text-align:center;clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);transform:translate(-50%,-50%)}
@@ -95,14 +98,14 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p4 .node .cn{font-size:19px;font-weight:700;color:#fff;margin:6px 0 2px}
 #p4 .node .en{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--sub)}
 #p4 .node .desc{margin-top:7px;padding-top:7px;border-top:1px dashed rgba(0,229,255,.22);font-size:13px;line-height:1.5;color:var(--sub)}
-#p4 .n1{left:960px;top:185px;border-color:rgba(0,229,255,.45)}
-#p4 .n2{left:623px;top:430px;border-color:rgba(46,124,246,.45)}
-#p4 .n3{left:751px;top:827px;border-color:rgba(0,255,170,.45)}
-#p4 .n4{left:1169px;top:827px;border-color:rgba(139,92,246,.45)}
-#p4 .n5{left:1297px;top:430px;border-color:rgba(0,229,255,.35)}
+#p4 .n1{left:960px;top:240px;border-color:rgba(0,229,255,.45)}
+#p4 .n2{left:623px;top:485px;border-color:rgba(46,124,246,.45)}
+#p4 .n3{left:751px;top:882px;border-color:rgba(0,255,170,.45)}
+#p4 .n4{left:1169px;top:882px;border-color:rgba(139,92,246,.45)}
+#p4 .n5{left:1297px;top:485px;border-color:rgba(0,229,255,.35)}
 #p4 .n1 .en{color:var(--cyan)} #p4 .n2 .en{color:var(--blue)} #p4 .n3 .en{color:var(--green)} #p4 .n4 .en{color:var(--violet)} #p4 .n5 .en{color:var(--cyan)}
 #p4 svg.spokes{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none}
-#p4 svg.spokes line{stroke:rgba(0,229,255,.3);stroke-width:2}
+#p4 svg.spokes line{stroke:rgba(0,255,170,.45);stroke-width:2.5;stroke-dasharray:6 5}
 #p4 .note{position:absolute;bottom:84px;left:0;width:100%;text-align:center;font-size:22px;color:var(--sub);letter-spacing:2px}
 #p4 .note em{font-style:normal;color:var(--green);font-weight:700;text-shadow:0 0 18px rgba(0,255,170,.5)}
 /* ============ P5 通用 Harness ↔ 子系统映射 ============ */
@@ -211,7 +214,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
     <div class="ring ring2"></div>
     <div class="title">
       <h1>用 Harness 为 AI 编程<br><span class="hl">构建专属工作系统</span></h1>
-      <div class="sub">如何驾驭 AI 这匹烈马</div>
+      <div class="sub">—— 如何驾驭 AI 这匹烈马</div>
     </div>
     <div class="meta"><span>HSIL</span>｜<span>Hale Li</span>｜<span>14 Aug</span></div>
     <div class="sys">// HARNESS SYSTEM // BUILD YOUR OWN WORKFLOW</div>
@@ -226,9 +229,61 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
     </div>
     <div class="rcol">
       <div class="hudpanel">
-        <span class="horse">🐎</span>
-        <svg class="reign" viewBox="0 0 760 640" preserveAspectRatio="none">
-          <path d="M120 160 C 240 60, 520 60, 640 160 C 700 210, 700 430, 640 500 C 540 600, 220 600, 120 500 C 60 430, 60 210, 120 160 Z"/>
+        <svg class="horse-svg" viewBox="0 0 760 640" preserveAspectRatio="xMidYMid meet" role="img" aria-label="绿色线条插画：骑士驾驭佩戴马鞍与缰绳的烈马">
+          <g transform="translate(-89,-48) scale(0.95)">
+            <!-- 地面与草簇 -->
+            <path d="M150 640 Q460 668 780 640" fill="none" stroke="#009B4C" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M262 646 q -6 -22 -20 -26 M382 654 q -4 -18 -16 -20 M562 656 q -5 -16 -14 -18 M702 648 q -6 -20 -18 -24" fill="none" stroke="#00A651" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+            <!-- 马身体 -->
+            <path d="M470 300 C560 260 640 280 700 320 C760 355 790 400 790 450 C790 520 740 560 660 560 C600 560 540 540 500 490 C460 440 440 380 470 300 Z" fill="rgba(0,166,81,0.07)" stroke="#00A651" stroke-width="6" stroke-linejoin="round"/>
+            <!-- 马头 -->
+            <path d="M430 210 C380 180 320 195 285 250 C265 285 258 320 268 345 C278 365 305 372 330 362 C365 348 395 330 415 300 C435 265 440 235 430 210 Z" fill="rgba(0,166,81,0.07)" stroke="#00A651" stroke-width="6" stroke-linejoin="round"/>
+            <!-- 耳朵 -->
+            <path d="M385 205 Q 372 150 400 142 Q 410 168 408 190" fill="none" stroke="#00A651" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M415 195 Q 415 140 445 138 Q 445 168 432 195" fill="none" stroke="#00A651" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- 鬃毛 -->
+            <path d="M430 205 Q 470 178 520 228 Q 562 272 584 306" fill="none" stroke="#009B4C" stroke-width="13" stroke-linecap="round" opacity="0.85"/>
+            <path d="M452 212 l -10 -30 M482 232 l -6 -28 M514 254 l -2 -24" fill="none" stroke="#00E676" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+            <!-- 眼睛 -->
+            <circle cx="352" cy="262" r="13" fill="none" stroke="#7CFC9B" stroke-width="6"/>
+            <circle cx="350" cy="260" r="4.5" fill="#00E676"/>
+            <!-- 鼻孔与嘴 -->
+            <path d="M276 318 q 10 8 22 6" fill="none" stroke="#00A651" stroke-width="5" stroke-linecap="round"/>
+            <path d="M296 352 Q 320 362 344 350" fill="none" stroke="#00A651" stroke-width="5" stroke-linecap="round"/>
+            <!-- 笼头 -->
+            <path d="M340 222 L 372 352" fill="none" stroke="#00A651" stroke-width="8" stroke-linecap="round"/>
+            <circle cx="368" cy="340" r="11" fill="none" stroke="#7CFC9B" stroke-width="5"/>
+            <!-- 马鞍 -->
+            <path d="M520 250 C 570 226 640 226 690 250 L 690 288 C 640 268 570 268 520 288 Z" fill="rgba(0,230,118,.22)" stroke="#00E676" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M522 262 C 575 244 640 244 688 262" fill="none" stroke="#009B4C" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+            <!-- 鞍带 -->
+            <path d="M565 286 L 552 330 M645 286 L 658 330" fill="none" stroke="#00A651" stroke-width="5" stroke-linecap="round"/>
+            <!-- 骑手：腿 -->
+            <path d="M595 292 L 585 340 M628 292 L 642 332" fill="none" stroke="#00A651" stroke-width="15" stroke-linecap="round"/>
+            <!-- 骑手：躯干（前倾） -->
+            <path d="M600 232 C 588 256 576 276 568 298" fill="none" stroke="#00E676" stroke-width="24" stroke-linecap="round"/>
+            <!-- 骑手：头 -->
+            <circle cx="586" cy="202" r="26" fill="rgba(0,166,81,.15)" stroke="#00E676" stroke-width="6"/>
+            <!-- 骑手：手臂与手（握缰绳） -->
+            <path d="M586 240 C 556 258 522 278 498 304" fill="none" stroke="#00A651" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="498" cy="304" r="10" fill="none" stroke="#7CFC9B" stroke-width="5"/>
+            <!-- 缰绳：马嘴 → 骑手之手 -->
+            <path d="M368 340 C 424 396 462 366 494 314" fill="none" stroke="#00A651" stroke-width="7" stroke-linecap="round"/>
+            <path d="M372 350 C 428 402 466 372 496 322" fill="none" stroke="#009B4C" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+            <!-- 马腿 -->
+            <path d="M520 540 Q 515 585 512 630" fill="none" stroke="#00A651" stroke-width="14" stroke-linecap="round"/>
+            <path d="M502 630 Q 512 640 524 630" fill="none" stroke="#009B4C" stroke-width="6" stroke-linecap="round"/>
+            <path d="M700 540 Q 706 585 710 632" fill="none" stroke="#00A651" stroke-width="14" stroke-linecap="round"/>
+            <path d="M700 632 Q 710 642 722 632" fill="none" stroke="#009B4C" stroke-width="6" stroke-linecap="round"/>
+            <!-- 尾巴 -->
+            <path d="M785 420 Q 820 430 830 470 Q 838 500 822 540" fill="none" stroke="#00A651" stroke-width="11" stroke-linecap="round"/>
+            <path d="M800 452 Q 826 458 830 486 M 812 500 Q 828 510 824 534" fill="none" stroke="#009B4C" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+            <!-- 星光点缀 -->
+            <path d="M150 148 h 30 M165 133 v 30" stroke="#7CFC9B" stroke-width="6" stroke-linecap="round"/>
+            <path d="M820 168 h 26 M833 155 v 26" stroke="#00E676" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+            <circle cx="640" cy="132" r="7" fill="#7CFC9B"/>
+            <circle cx="238" cy="470" r="6" fill="#00E676" opacity="0.8"/>
+          </g>
         </svg>
         <span class="tick" style="left:50%;top:6%"></span>
         <span class="tick" style="left:16%;top:26%"></span>
@@ -254,9 +309,11 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
   <section class="slide" id="p4">
     <div class="ptitle"><h2>Harness 五个子系统</h2><div class="gline"></div></div>
     <svg class="spokes">
-      <line x1="960" y1="540" x2="960" y2="185"/><line x1="960" y1="540" x2="623" y2="430"/>
-      <line x1="960" y1="540" x2="751" y2="827"/><line x1="960" y1="540" x2="1169" y2="827"/>
-      <line x1="960" y1="540" x2="1297" y2="430"/>
+      <line x1="960" y1="540" x2="960" y2="240"/>
+      <line x1="960" y1="540" x2="623" y2="485"/>
+      <line x1="960" y1="540" x2="751" y2="882"/>
+      <line x1="960" y1="540" x2="1169" y2="882"/>
+      <line x1="960" y1="540" x2="1297" y2="485"/>
     </svg>
     <div class="hub"><div class="t1">AI 智能体</div><div class="t2">AGENT CORE</div></div>
     <div class="node card n1"><span class="bn">01</span><div class="ic">📜</div><div class="cn">指令子系统</div><div class="en">INSTRUCTION</div><div class="desc">告诉 AI 做什么、按什么规矩做</div></div>
@@ -362,6 +419,16 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
   const slides=[...document.querySelectorAll('.slide')];
   const bar=document.getElementById('bar'),pn=document.getElementById('pageno');
   let cur=0;
+  // 自适应视口：等比缩放舞台并居中
+  const stage=document.getElementById('stage');
+  function fit(){
+    const s=Math.min(window.innerWidth/1920,window.innerHeight/1080);
+    stage.style.transform='scale('+s+')';
+    stage.style.left=((window.innerWidth-1920*s)/2)+'px';
+    stage.style.top=((window.innerHeight-1080*s)/2)+'px';
+  }
+  window.addEventListener('resize',fit);
+  fit();
   function show(i){
     cur=Math.max(0,Math.min(slides.length-1,i));
     slides.forEach((s,k)=>s.classList.toggle('active',k===cur));
