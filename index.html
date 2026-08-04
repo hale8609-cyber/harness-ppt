@@ -122,10 +122,11 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .phase .phlab{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;color:var(--cyan);text-align:center;margin-bottom:18px;text-shadow:0 0 14px rgba(0,229,255,.5)}
 #p5 .pharrow{flex:0 0 auto;width:56px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:42px;font-weight:900;color:var(--green);text-shadow:0 0 18px rgba(0,255,170,.7)}
 /* ---- PHASE 1：通用 Harness · 两列 5 子系统齐备 ---- */
-#p5 .tools{width:628px;display:flex;gap:16px;flex:1}
-#p5 .gtool{flex:1;padding:18px 16px 14px;display:flex;flex-direction:column;gap:9px;clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px)}
+#p5 .tools{width:628px;display:flex;flex-direction:column;flex:1}
+#p5 .gtool{flex:1;padding:20px 20px 14px;display:flex;flex-direction:column;gap:10px;clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px)}
 #p5 .gtool .gh{text-align:center}
-#p5 .gtool .gh .ic{font-size:30px;display:block;filter:drop-shadow(0 0 12px rgba(0,229,255,.45))}
+#p5 .gtool .gh .logos{display:flex;justify-content:center;align-items:center;gap:14px}
+#p5 .gtool .gh .logos svg{width:30px;height:30px;display:block;filter:drop-shadow(0 0 10px rgba(0,229,255,.4))}
 #p5 .gtool .gh h4{font-family:'Orbitron',sans-serif;font-size:19px;letter-spacing:1.5px;margin:6px 0 2px;color:#fff}
 #p5 .gtool .gh .role{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2.5px;color:var(--dim)}
 #p5 .sub5{display:flex;flex-direction:column;gap:6px}
@@ -333,24 +334,20 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <div class="phlab">PHASE 1 · 通用底座</div>
         <div class="tools">
           <div class="gtool card">
-            <div class="gh"><span class="ic">💻</span><h4>GitHub Copilot</h4><div class="role">通用 Harness</div></div>
-            <div class="sub5">
-              <div class="subrow r1"><span class="sn">指令</span><span class="sf">对话式表达需求</span></div>
-              <div class="subrow r2"><span class="sn">工具</span><span class="sf">代码补全 · 生成</span></div>
-              <div class="subrow r3"><span class="sn">环境</span><span class="sf">读取仓库上下文</span></div>
-              <div class="subrow r4"><span class="sn">状态</span><span class="sf">会话历史记忆</span></div>
-              <div class="subrow r5"><span class="sn">反馈</span><span class="sf">报错 · 测试提示</span></div>
+            <div class="gh">
+              <div class="logos">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GitHub Copilot"><path d="M12 1.8 L15.2 8.8 L22.2 12 L15.2 15.2 L12 22.2 L8.8 15.2 L1.8 12 L8.8 8.8 Z" fill="#ffffff"/></svg>
+                <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="OpenCode"><path fill-rule="evenodd" clip-rule="evenodd" d="M384 416H128V96H384V416ZM320 160H192V352H320V160Z" fill="#ffffff"/><path d="M320 224V352H192V224H320Z" fill="#9aa0a6"/></svg>
+              </div>
+              <h4>GitHub Copilot &amp; OpenCode</h4>
+              <div class="role">通用 Harness</div>
             </div>
-            <div class="full5">五大子系统 · 齐备</div>
-          </div>
-          <div class="gtool card">
-            <div class="gh"><span class="ic">⚡</span><h4>OpenCode</h4><div class="role">通用 Harness</div></div>
             <div class="sub5">
-              <div class="subrow r1"><span class="sn">指令</span><span class="sf">CLI 对话指令</span></div>
-              <div class="subrow r2"><span class="sn">工具</span><span class="sf">文件操作 · 命令执行</span></div>
-              <div class="subrow r3"><span class="sn">环境</span><span class="sf">项目代码感知</span></div>
-              <div class="subrow r4"><span class="sn">状态</span><span class="sf">会话上下文跟踪</span></div>
-              <div class="subrow r5"><span class="sn">反馈</span><span class="sf">测试 · 沙箱验证</span></div>
+              <div class="subrow r1"><span class="sn">指令</span><span class="sf">对话式表达需求 · CLI 驱动</span></div>
+              <div class="subrow r2"><span class="sn">工具</span><span class="sf">代码补全 / 生成 · 文件操作 / 命令执行</span></div>
+              <div class="subrow r3"><span class="sn">环境</span><span class="sf">读取仓库上下文 · 项目代码感知</span></div>
+              <div class="subrow r4"><span class="sn">状态</span><span class="sf">会话历史记忆 · 上下文跟踪</span></div>
+              <div class="subrow r5"><span class="sn">反馈</span><span class="sf">报错 / 测试提示 · 测试 / 沙箱验证</span></div>
             </div>
             <div class="full5">五大子系统 · 齐备</div>
           </div>
