@@ -117,53 +117,53 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p4 .note{position:absolute;bottom:84px;left:0;width:100%;text-align:center;font-size:22px;color:var(--sub);letter-spacing:2px}
 #p4 .note em{font-style:normal;color:var(--cyan);font-weight:700;text-shadow:0 0 18px rgba(0,229,255,.5)}
 /* ============ P5 通用→专属 Harness 演化（合并页 v2：通用 5 子系统齐备） ============ */
-#p5 .evo{position:absolute;top:192px;left:0;width:100%;display:flex;justify-content:center;align-items:stretch;gap:0}
-#p5 .phase{position:relative;display:flex;flex-direction:column}
-#p5 .phase .phlab{font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;color:var(--cyan);text-align:center;margin-bottom:18px;text-shadow:0 0 14px rgba(0,229,255,.5)}
-#p5 .pharrow{flex:0 0 auto;width:56px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:42px;font-weight:900;color:var(--green);text-shadow:0 0 18px rgba(0,255,170,.7)}
-/* ---- PHASE 1：通用 Harness · 两列 5 子系统齐备 ---- */
-#p5 .tools{width:628px;display:flex;flex-direction:column;flex:1}
-#p5 .gtool{flex:1;padding:20px 20px 14px;display:flex;flex-direction:column;gap:10px;clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px)}
-#p5 .gtool .gh{text-align:center}
-#p5 .gtool .gh .logos{display:flex;justify-content:center;align-items:center;gap:14px}
-#p5 .gtool .gh .logos svg{width:30px;height:30px;display:block;filter:drop-shadow(0 0 10px rgba(0,229,255,.4))}
-#p5 .gtool .gh h4{font-family:'Orbitron',sans-serif;font-size:19px;letter-spacing:1.5px;margin:6px 0 2px;color:#fff}
-#p5 .gtool .gh .role{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:2.5px;color:var(--dim)}
-#p5 .sub5{display:flex;flex-direction:column;gap:6px}
-#p5 .subrow{display:flex;align-items:center;gap:9px;padding:6px 9px;background:rgba(0,229,255,.035);border:1px solid rgba(0,229,255,.1);border-left:3px solid var(--cyan)}
-#p5 .subrow .sn{flex:0 0 auto;font-size:14px;font-weight:900;letter-spacing:1px}
-#p5 .subrow .sf{flex:1;font-size:11.5px;line-height:1.4;color:var(--sub)}
-#p5 .subrow.r1{border-left-color:var(--cyan)}#p5 .subrow.r1 .sn{color:var(--cyan)}
-#p5 .subrow.r2{border-left-color:var(--blue)}#p5 .subrow.r2 .sn{color:var(--blue)}
-#p5 .subrow.r3{border-left-color:var(--green)}#p5 .subrow.r3 .sn{color:var(--green)}
-#p5 .subrow.r4{border-left-color:var(--violet)}#p5 .subrow.r4 .sn{color:var(--violet)}
-#p5 .subrow.r5{border-left-color:var(--amber)}#p5 .subrow.r5 .sn{color:var(--amber)}
-#p5 .full5{margin-top:auto;padding-top:9px;text-align:center;font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;color:var(--green);border-top:1px dashed rgba(0,255,170,.35)}
-#p5 .covt{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:1.5px;padding:4px 10px;border:1px solid rgba(122,145,180,.5);color:#93B4DC;background:rgba(122,145,180,.1)}
-/* ---- PHASE 2：做了什么 → 加强了什么 ---- */
-#p5 .upg{width:522px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px}
-#p5 .upgrow{padding:16px 18px;display:flex;align-items:center;gap:14px;border:1px solid var(--line);background:rgba(0,229,255,.04);clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
-#p5 .upgrow .what{flex:0 0 auto;width:200px}
-#p5 .upgrow .what .wlab{font-family:'Orbitron',sans-serif;font-size:9.5px;letter-spacing:2px;color:var(--dim);margin-bottom:5px}
-#p5 .upgrow .what b{font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.5;color:var(--green)}
-#p5 .upgrow .warrow{flex:0 0 auto;color:var(--green);font-size:22px;font-weight:700;text-shadow:0 0 12px rgba(0,255,170,.5)}
-#p5 .upgrow .boost{flex:1;text-align:center}
-#p5 .upgrow .boost .sname{font-size:17px;font-weight:900;color:#fff;letter-spacing:1px}
-#p5 .upgrow .boost .fix{margin-top:4px;font-size:13px;color:var(--green)}
+/* ============ P5 从通用底座到专属 Harness（纵向三段流） ============ */
+#p5 .evo{position:absolute;top:184px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
+#p5 .phlab{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:700;letter-spacing:4px;color:var(--cyan);text-align:center;margin-bottom:6px;text-shadow:0 0 14px rgba(0,229,255,.5)}
+#p5 .pharrow{flex:0 0 auto;width:100%;text-align:center;font-family:'Orbitron',sans-serif;font-size:25px;font-weight:900;line-height:1;color:var(--green);text-shadow:0 0 18px rgba(0,255,170,.7);margin:-6px 0}
+/* PHASE 1 通用底座：全宽横条 + 5 列子系统 */
+#p5 .tools{width:1800px;padding:13px 28px 15px;display:flex;flex-direction:column;gap:12px}
+#p5 .gtool{clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
+#p5 .gh{display:flex;align-items:center;justify-content:center;gap:16px}
+#p5 .gh .logos{display:flex;gap:12px}
+#p5 .gh .logos svg{width:36px;height:36px;display:block;filter:drop-shadow(0 0 12px rgba(0,229,255,.45))}
+#p5 .gh h4{font-family:'Orbitron',sans-serif;font-size:26px;letter-spacing:2px;color:#fff}
+#p5 .gh .role{font-family:'Orbitron',sans-serif;font-size:12.5px;letter-spacing:3px;color:var(--dim);border-left:1px solid rgba(122,145,180,.4);padding-left:16px}
+#p5 .subcols{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+#p5 .scol{display:flex;flex-direction:column;gap:6px;padding:11px 16px;background:rgba(0,229,255,.035);border:1px solid rgba(0,229,255,.12);border-top:3px solid var(--cyan)}
+#p5 .scol .sic{font-size:25px;line-height:1}
+#p5 .scol .sname{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;letter-spacing:2px}
+#p5 .scol .sf{font-size:16px;line-height:1.4;color:var(--sub)}
+#p5 .scol.s1{border-top-color:var(--cyan)}#p5 .scol.s1 .sname{color:var(--cyan)}
+#p5 .scol.s2{border-top-color:var(--blue)}#p5 .scol.s2 .sname{color:var(--blue)}
+#p5 .scol.s3{border-top-color:var(--green)}#p5 .scol.s3 .sname{color:var(--green)}
+#p5 .scol.s4{border-top-color:var(--violet)}#p5 .scol.s4 .sname{color:var(--violet)}
+#p5 .scol.s5{border-top-color:var(--amber)}#p5 .scol.s5 .sname{color:var(--amber)}
+/* PHASE 2 做了什么 → 加强了什么：三行全宽 */
+#p5 .upg{width:1800px;display:flex;flex-direction:column;gap:11px}
+#p5 .upgrow{padding:10px 22px;display:flex;align-items:center;gap:18px;border:1px solid var(--line);background:rgba(0,229,255,.04);clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
+#p5 .upgrow .what{flex:0 0 auto;width:470px}
+#p5 .upgrow .what .wlab{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2.5px;color:var(--dim);margin-bottom:5px}
+#p5 .upgrow .what b{font-family:'JetBrains Mono',monospace;font-size:20px;line-height:1.4;color:var(--green)}
+#p5 .upgrow .warrow{flex:0 0 auto;color:var(--green);font-size:30px;font-weight:700;text-shadow:0 0 12px rgba(0,255,170,.5)}
+#p5 .upgrow .boost{flex:1;display:flex;align-items:center;justify-content:center;gap:26px}
+#p5 .upgrow .boost .sname{font-size:25px;font-weight:900;color:#fff;letter-spacing:1.5px}
+#p5 .upgrow .boost .fix{font-size:19px;color:var(--green)}
 #p5 .upgrow .boost .fix b{color:var(--cyan)}
-/* ---- PHASE 3：专属成果 ---- */
-#p5 .result{width:292px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-color:rgba(0,255,170,.4);padding:22px;clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
-#p5 .result .ric{font-size:52px;filter:drop-shadow(0 0 18px rgba(0,255,170,.65))}
-#p5 .result h3{font-family:'Orbitron',sans-serif;font-size:24px;letter-spacing:3px;color:var(--green);margin:14px 0 5px;text-shadow:0 0 20px rgba(0,255,170,.45)}
-#p5 .result .rsub{font-size:14px;color:var(--sub)}
-#p5 .result .all5{margin:16px 0;display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
+/* PHASE 3 专属成果：全宽横幅 */
+#p5 .result{width:1800px;display:flex;align-items:center;justify-content:center;gap:30px;padding:13px 30px;border-color:rgba(0,255,170,.4);clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
+#p5 .result .ric{font-size:40px;filter:drop-shadow(0 0 18px rgba(0,255,170,.65))}
+#p5 .result .rtxt{text-align:left}
+#p5 .result h3{font-family:'Orbitron',sans-serif;font-size:25px;letter-spacing:3px;color:var(--green);margin:0 0 4px;text-shadow:0 0 20px rgba(0,255,170,.45)}
+#p5 .result .rsub{font-size:15px;color:var(--sub)}
+#p5 .result .all5{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 #p5 .result .all5 .covt:nth-child(1){color:var(--cyan);border-color:rgba(0,229,255,.5);background:rgba(0,229,255,.08)}
 #p5 .result .all5 .covt:nth-child(2){color:var(--blue);border-color:rgba(46,124,246,.55);background:rgba(46,124,246,.1)}
 #p5 .result .all5 .covt:nth-child(3){color:var(--green);border-color:rgba(0,255,170,.5);background:rgba(0,255,170,.08)}
 #p5 .result .all5 .covt:nth-child(4){color:var(--violet);border-color:rgba(139,92,246,.55);background:rgba(139,92,246,.12)}
 #p5 .result .all5 .covt:nth-child(5){color:var(--amber);border-color:rgba(255,194,75,.55);background:rgba(255,194,75,.1)}
-#p5 .result .formula{margin-top:3px;font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--green);letter-spacing:1px}
-#p5 .quote{position:absolute;bottom:82px;left:0;width:100%;text-align:center;font-size:25px;color:#fff}
+#p5 .result .formula{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--green);letter-spacing:1px}
+#p5 .quote{position:absolute;bottom:42px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
 #p5 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P6 双层嵌套（上下） ============ */
 #p6 .halfup{position:absolute;top:190px;left:0;width:100%;height:400px}
@@ -327,33 +327,30 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
   </section>
 
   <!-- P5 通用→专属 Harness 演化（合并页 v2） -->
-  <section class="slide" id="p5">
+    <section class="slide" id="p5">
     <div class="ptitle"><h2>从通用底座到专属 Harness</h2><div class="gline"></div></div>
     <div class="evo">
       <div class="phase">
         <div class="phlab">PHASE 1 · 通用底座</div>
-        <div class="tools">
-          <div class="gtool card">
-            <div class="gh">
-              <div class="logos">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GitHub Copilot"><path d="M12 1.8 L15.2 8.8 L22.2 12 L15.2 15.2 L12 22.2 L8.8 15.2 L1.8 12 L8.8 8.8 Z" fill="#ffffff"/></svg>
-                <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="OpenCode"><path fill-rule="evenodd" clip-rule="evenodd" d="M384 416H128V96H384V416ZM320 160H192V352H320V160Z" fill="#ffffff"/><path d="M320 224V352H192V224H320Z" fill="#9aa0a6"/></svg>
-              </div>
-              <h4>GitHub Copilot &amp; OpenCode</h4>
-              <div class="role">通用 Harness</div>
+        <div class="tools gtool card">
+          <div class="gh">
+            <div class="logos">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="GitHub Copilot"><path d="M12 1.8 L15.2 8.8 L22.2 12 L15.2 15.2 L12 22.2 L8.8 15.2 L1.8 12 L8.8 8.8 Z" fill="#ffffff"/></svg>
+              <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="OpenCode"><path fill-rule="evenodd" clip-rule="evenodd" d="M384 416H128V96H384V416ZM320 160H192V352H320V160Z" fill="#ffffff"/><path d="M320 224V352H192V224H320Z" fill="#9aa0a6"/></svg>
             </div>
-            <div class="sub5">
-              <div class="subrow r1"><span class="sn">指令</span><span class="sf">对话式表达需求 · CLI 驱动</span></div>
-              <div class="subrow r2"><span class="sn">工具</span><span class="sf">代码补全 / 生成 · 文件操作 / 命令执行</span></div>
-              <div class="subrow r3"><span class="sn">环境</span><span class="sf">读取仓库上下文 · 项目代码感知</span></div>
-              <div class="subrow r4"><span class="sn">状态</span><span class="sf">会话历史记忆 · 上下文跟踪</span></div>
-              <div class="subrow r5"><span class="sn">反馈</span><span class="sf">报错 / 测试提示 · 测试 / 沙箱验证</span></div>
-            </div>
-            <div class="full5">五大子系统 · 齐备</div>
+            <h4>GitHub Copilot &amp; OpenCode</h4>
+            <div class="role">通用 Harness · 五大子系统齐备</div>
+          </div>
+          <div class="subcols">
+            <div class="scol s1"><span class="sic">💻</span><div class="sname">指令</div><div class="sf">对话式表达需求<br>CLI 驱动</div></div>
+            <div class="scol s2"><span class="sic">🛠️</span><div class="sname">工具</div><div class="sf">代码补全 / 生成<br>文件操作 / 命令执行</div></div>
+            <div class="scol s3"><span class="sic">🧭</span><div class="sname">环境</div><div class="sf">读取仓库上下文<br>项目代码感知</div></div>
+            <div class="scol s4"><span class="sic">🧠</span><div class="sname">状态</div><div class="sf">会话历史记忆<br>上下文跟踪</div></div>
+            <div class="scol s5"><span class="sic">🔁</span><div class="sname">反馈</div><div class="sf">报错 / 测试提示<br>测试 / 沙箱验证</div></div>
           </div>
         </div>
       </div>
-      <div class="pharrow">→</div>
+      <div class="pharrow">▼</div>
       <div class="phase">
         <div class="phlab">PHASE 2 · 做了什么 → 加强了什么</div>
         <div class="upg">
@@ -374,13 +371,15 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
           </div>
         </div>
       </div>
-      <div class="pharrow">→</div>
+      <div class="pharrow">▼</div>
       <div class="phase">
         <div class="phlab">PHASE 3 · 专属成果</div>
         <div class="result card">
           <span class="ric">🏆</span>
-          <h3>项目级专属 Harness</h3>
-          <div class="rsub">五个子系统 · 全部就位</div>
+          <div class="rtxt">
+            <h3>项目级专属 Harness</h3>
+            <div class="rsub">五个子系统 · 全部就位</div>
+          </div>
           <div class="all5">
             <span class="covt">指令</span><span class="covt">工具</span><span class="covt">环境</span><span class="covt">状态</span><span class="covt">反馈</span>
           </div>
