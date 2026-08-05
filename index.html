@@ -143,30 +143,30 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .scol.s4{border-top-color:var(--violet)}#p5 .scol.s4 .sname{color:var(--violet)}
 #p5 .scol.s5{border-top-color:var(--amber)}#p5 .scol.s5 .sname{color:var(--amber)}
 /* STEP 2 做了什么 → 加强了什么：三行全宽三块式 */
-#p5 .upg{width:1800px;display:flex;flex-direction:column;gap:13px}
+#p5 .upg{width:1800px;display:flex;flex-direction:column;gap:9px}
 #p5 .upgrow{display:flex;align-items:stretch;gap:14px}
 #p5 .upgrow .stepno{flex:0 0 56px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:27px;font-weight:900;letter-spacing:1px}
-#p5 .upgrow .cell{flex:1;display:flex;align-items:center;gap:18px;padding:13px 24px;border-radius:10px;border:1px solid var(--line);background:rgba(0,229,255,.045)}
-#p5 .upgrow .cell .cico{font-size:29px;line-height:1;flex:0 0 auto}
-#p5 .upgrow .cell .clab{font-family:'Orbitron',sans-serif;font-size:11.5px;letter-spacing:2.5px;color:var(--dim);margin-bottom:4px}
-#p5 .upgrow .cell b{font-size:19px;line-height:1.45;font-weight:700}
-#p5 .upgrow .cell .fix-sub{font-size:14.5px;color:var(--sub);margin-top:3px;letter-spacing:.5px}
+#p5 .upgrow .cell{flex:1;display:flex;align-items:center;gap:16px;padding:9px 20px;border-radius:10px;border:1px solid var(--line);background:rgba(0,229,255,.045)}
+#p5 .upgrow .cell .cico{font-size:26px;line-height:1;flex:0 0 auto}
+#p5 .upgrow .cell .clab{font-family:'Orbitron',sans-serif;font-size:11.5px;letter-spacing:2.5px;color:var(--dim);margin-bottom:3px}
+#p5 .upgrow .cell b{font-size:18px;line-height:1.4;font-weight:700}
+#p5 .upgrow .cell .fix-sub{font-size:14px;color:var(--sub);margin-top:2px;letter-spacing:.5px}
 #p5 .upgrow .arr{flex:0 0 40px;align-self:center;text-align:center;font-size:27px;font-weight:700;color:var(--green);text-shadow:0 0 12px rgba(0,255,170,.5)}
-#p5 .upgrow .cell.a b{font-family:'JetBrains Mono',monospace;color:#fff}
-#p5 .upgrow .cell.b b{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:900;letter-spacing:2px}
-#p5 .upgrow .cell.c b em{font-style:normal;color:var(--cyan)}
+#p5 .upgrow .cell.a b em{font-style:normal;color:var(--cyan)}
+#p5 .upgrow .cell.b b{font-family:'JetBrains Mono',monospace;color:#fff}
+#p5 .upgrow .cell.c b{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:900;letter-spacing:2px}
 /* 行 1：环境（绿） */
 #p5 .upgrow.r1 .stepno{color:var(--green)}
-#p5 .upgrow.r1 .cell.b{background:rgba(0,255,170,.10);border-color:rgba(0,255,170,.5);border-left:5px solid var(--green)}
-#p5 .upgrow.r1 .cell.b b{color:var(--green)}
+#p5 .upgrow.r1 .cell.c{background:rgba(0,255,170,.10);border-color:rgba(0,255,170,.5);border-left:5px solid var(--green)}
+#p5 .upgrow.r1 .cell.c b{color:var(--green)}
 /* 行 2：状态（紫） */
 #p5 .upgrow.r2 .stepno{color:var(--violet)}
-#p5 .upgrow.r2 .cell.b{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.55);border-left:5px solid var(--violet)}
-#p5 .upgrow.r2 .cell.b b{color:#c4a5ff}
+#p5 .upgrow.r2 .cell.c{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.55);border-left:5px solid var(--violet)}
+#p5 .upgrow.r2 .cell.c b{color:#c4a5ff}
 /* 行 3：反馈（金） */
 #p5 .upgrow.r3 .stepno{color:var(--amber)}
-#p5 .upgrow.r3 .cell.b{background:rgba(255,194,75,.10);border-color:rgba(255,194,75,.55);border-left:5px solid var(--amber)}
-#p5 .upgrow.r3 .cell.b b{color:var(--amber)}
+#p5 .upgrow.r3 .cell.c{background:rgba(255,194,75,.10);border-color:rgba(255,194,75,.55);border-left:5px solid var(--amber)}
+#p5 .upgrow.r3 .cell.c b{color:var(--amber)}
 /* STEP 3 专属成果：全宽横幅 */
 #p5 .result{width:1800px;display:flex;align-items:center;justify-content:center;gap:30px;padding:13px 30px;border-color:rgba(0,255,170,.4);clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
 #p5 .result .ric{font-size:40px;filter:drop-shadow(0 0 18px rgba(0,255,170,.65))}
@@ -366,35 +366,35 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
       </div>
       <div class="pharrow">▼</div>
       <div class="phase">
-        <div class="phlab">STEP 2 · 做了什么 → 加强了什么</div>
+        <div class="phlab">STEP 2 · 为了解决什么 → 我们做了什么 → 加强了什么</div>
         <div class="upg">
           <div class="upgrow r1">
             <div class="stepno">01</div>
-            <div class="cell a"><span class="cico">🌱</span><div><div class="clab">做了什么</div><b>project-glossary<br>project-knowledge</b></div></div>
+            <div class="cell a"><span class="cico">✅</span><div><div class="clab">为了解决什么</div><b>解决「<em>自由发挥</em>」</b><div class="fix-sub">需求理解不一致</div></div></div>
             <span class="arr">→</span>
-            <div class="cell b"><div><div class="clab">被加强的子系统</div><b>环境子系统</b></div></div>
+            <div class="cell b"><span class="cico">🌱</span><div><div class="clab">我们做了什么</div><b>project-glossary<br>project-knowledge</b></div></div>
             <span class="arr">→</span>
-            <div class="cell c"><span class="cico">✅</span><div><div class="clab">解决了什么</div><b>解决「<em>自由发挥</em>」</b><div class="fix-sub">需求理解不一致</div></div></div>
+            <div class="cell c"><div><div class="clab">加强了什么子系统</div><b>环境子系统</b></div></div>
           </div>
           <div class="upgrow r2">
             <div class="stepno">02</div>
-            <div class="cell a"><span class="cico">📊</span><div><div class="clab">做了什么</div><b>OpenSpec<br>Change 管理 + task breakdown</b></div></div>
+            <div class="cell a"><span class="cico">✅</span><div><div class="clab">为了解决什么</div><b>解决「<em>来回折腾</em>」</b><div class="fix-sub">过程完全失控</div></div></div>
             <span class="arr">→</span>
-            <div class="cell b"><div><div class="clab">被加强的子系统</div><b>状态子系统</b></div></div>
+            <div class="cell b"><span class="cico">📊</span><div><div class="clab">我们做了什么</div><b>OpenSpec<br>Change 管理 + task breakdown</b></div></div>
             <span class="arr">→</span>
-            <div class="cell c"><span class="cico">✅</span><div><div class="clab">解决了什么</div><b>解决「<em>来回折腾</em>」</b><div class="fix-sub">过程完全失控</div></div></div>
+            <div class="cell c"><div><div class="clab">加强了什么子系统</div><b>状态子系统</b></div></div>
           </div>
           <div class="upgrow r3">
             <div class="stepno">03</div>
-            <div class="cell a"><span class="cico">🔁</span><div><div class="clab">做了什么</div><b>TDD<br>测试先行 · 跑不过不算完成</b></div></div>
+            <div class="cell a"><span class="cico">✅</span><div><div class="clab">为了解决什么</div><b>解决「<em>说了不算</em>」</b><div class="fix-sub">没有判定标准</div></div></div>
             <span class="arr">→</span>
-            <div class="cell b"><div><div class="clab">被加强的子系统</div><b>反馈子系统</b></div></div>
+            <div class="cell b"><span class="cico">🔁</span><div><div class="clab">我们做了什么</div><b>TDD<br>测试先行 · 跑不过不算完成</b></div></div>
             <span class="arr">→</span>
-            <div class="cell c"><span class="cico">✅</span><div><div class="clab">解决了什么</div><b>解决「<em>说了不算</em>」</b><div class="fix-sub">没有判定标准</div></div></div>
+            <div class="cell c"><div><div class="clab">加强了什么子系统</div><b>反馈子系统</b></div></div>
           </div>
         </div>
       </div>
-      <div class="pharrow">▼</div>
+<div class="pharrow">▼</div>
       <div class="phase">
         <div class="phlab">STEP 3 · 专属成果</div>
         <div class="result card">
