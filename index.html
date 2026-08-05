@@ -180,33 +180,34 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .result .formula{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--green);letter-spacing:1px}
 #p5 .quote{position:absolute;bottom:42px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
 #p5 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
-/* ============ P6 双层嵌套（内外套娃） ============ */
-#p6 .outer{position:absolute;top:196px;left:110px;width:1700px;height:620px;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(6px);box-shadow:0 0 40px rgba(0,229,255,.08),inset 0 0 60px rgba(0,229,255,.04);clip-path:polygon(30px 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%,0 30px)}
-#p6 .olab{position:absolute;top:-17px;left:70px;padding:7px 26px;font-family:'Orbitron',sans-serif;font-size:15px;letter-spacing:4px;color:#03120c;background:var(--green);font-weight:700;box-shadow:0 0 26px rgba(0,255,170,.55)}
-#p6 .chain{position:absolute;top:58px;left:0;width:100%;display:flex;justify-content:center;align-items:center}
-#p6 .ch{width:200px;height:94px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:22px;font-weight:700;color:var(--txt);background:rgba(13,31,60,.7);border:1px solid var(--line);clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}
-#p6 .ch small{font-size:13px;font-weight:500;opacity:.75;letter-spacing:1px}
+/* ============ P6 双层循环（大环套小环） ============ */
+#p6 .outer{position:absolute;top:196px;left:110px;width:1700px;height:640px;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(6px);box-shadow:0 0 40px rgba(0,229,255,.08),inset 0 0 60px rgba(0,229,255,.04);clip-path:polygon(30px 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%,0 30px)}
+#p6 .olab{position:absolute;top:14px;left:26px;padding:6px 20px;font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:3px;color:#03120c;background:var(--green);font-weight:700;box-shadow:0 0 20px rgba(0,255,170,.5);z-index:3}
+#p6 svg.loop{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+#p6 .ch{position:absolute;width:180px;height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:23px;font-weight:700;color:var(--txt);background:rgba(13,31,60,.75);border:1px solid var(--line);clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);z-index:2}
+#p6 .ch small{font-size:12.5px;font-weight:500;opacity:.75;letter-spacing:1px}
 #p6 .ch.opt{border-style:dashed;color:var(--sub)}
-#p6 .arrow{width:44px;text-align:center;color:var(--green);font-size:26px;font-weight:700;text-shadow:0 0 12px rgba(0,255,170,.6)}
-#p6 .ch.hot{background:linear-gradient(120deg,rgba(0,255,170,.3),rgba(0,229,255,.16));border-color:var(--green);color:#fff;box-shadow:0 0 34px rgba(0,255,170,.45)}
-#p6 .dropv{position:absolute;left:1338px;top:152px;width:2px;height:107px;border-left:2px dashed rgba(0,255,170,.55)}
-#p6 .droph{position:absolute;left:850px;top:257px;width:488px;border-top:2px dashed rgba(0,255,170,.55)}
-#p6 .drop-tag{position:absolute;left:1350px;top:190px;padding:3px 12px;font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2px;color:#03120c;background:var(--green);font-weight:700;border-radius:2px;box-shadow:0 0 18px rgba(0,255,170,.5)}
-#p6 .inner{position:absolute;top:274px;left:440px;width:820px;height:240px;border:1px solid var(--green);background:rgba(0,20,14,.6);box-shadow:0 0 34px rgba(0,255,170,.12),inset 0 0 44px rgba(0,255,170,.05);clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px)}
-#p6 .ilab{position:absolute;top:-15px;left:50%;transform:translateX(-50%);padding:5px 22px;font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:3px;color:var(--green);background:#03120c;border:1px solid rgba(0,255,170,.4);white-space:nowrap}
-#p6 .ilab i{font-style:normal;color:#fff}
-#p6 .tdd{position:absolute;top:78px;left:0;width:100%;display:flex;justify-content:center;align-items:center;gap:0}
-#p6 .td{width:205px;height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:28px;letter-spacing:2px;clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
-#p6 .td small{font-family:'Noto Sans SC',sans-serif;font-size:13px;font-weight:400;letter-spacing:0;color:var(--sub);margin-top:6px}
-#p6 .td.red{background:rgba(239,68,68,.16);border:1px solid #ef4444;color:#f87171;box-shadow:0 0 26px rgba(239,68,68,.25)}
-#p6 .td.green{background:rgba(0,255,170,.14);border:1px solid var(--green);color:var(--green);box-shadow:0 0 26px rgba(0,255,170,.3)}
-#p6 .td.blue{background:rgba(46,124,246,.16);border:1px solid var(--blue);color:#7cb0ff;box-shadow:0 0 26px rgba(46,124,246,.3)}
-#p6 .cycle{display:inline-block;font-size:40px;color:var(--green);text-shadow:0 0 16px rgba(0,255,170,.7);margin:0 12px}
-#p6 .inote{position:absolute;bottom:16px;left:0;width:100%;text-align:center;font-size:15px;color:var(--txt)}
+#p6 .ch.hot{background:linear-gradient(120deg,rgba(0,255,170,.3),rgba(0,229,255,.16));border-color:var(--green);color:#fff;box-shadow:0 0 30px rgba(0,255,170,.45)}
+#p6 .link{position:absolute;height:3px;background:linear-gradient(90deg,rgba(0,255,170,.7),rgba(0,229,255,.7));transform-origin:left center;z-index:1}
+#p6 .lkarr{position:absolute;font-size:22px;color:var(--green);text-shadow:0 0 10px rgba(0,255,170,.7);z-index:1;line-height:1}
+#p6 .loop-tag{position:absolute;left:280px;top:54px;padding:3px 12px;font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:2px;color:var(--green);border:1px solid rgba(0,255,170,.45);background:rgba(0,20,14,.7);border-radius:2px;z-index:2}
+#p6 .dropv{position:absolute;left:849px;top:464px;width:2px;height:74px;border-left:2px dashed rgba(0,255,170,.55);z-index:1}
+#p6 .drop-tag{position:absolute;left:882px;top:480px;padding:3px 12px;font-family:'Orbitron',sans-serif;font-size:12.5px;letter-spacing:2px;color:#03120c;background:var(--green);font-weight:700;border-radius:2px;box-shadow:0 0 16px rgba(0,255,170,.5);z-index:3}
+#p6 .inner{position:absolute;top:204px;left:490px;width:720px;height:260px;border:1px solid var(--green);background:rgba(0,20,14,.62);box-shadow:0 0 30px rgba(0,255,170,.12),inset 0 0 40px rgba(0,255,170,.05);clip-path:polygon(20px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%,0 20px);z-index:2}
+#p6 .ilab{position:absolute;top:10px;left:16px;padding:4px 16px;font-family:'Orbitron',sans-serif;font-size:12.5px;letter-spacing:2px;color:var(--green);background:#03120c;border:1px solid rgba(0,255,170,.4);white-space:nowrap;z-index:2}
+#p6 .tdd{position:absolute;top:72px;left:0;width:100%;display:flex;justify-content:center;align-items:center}
+#p6 .td{width:190px;height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:26px;letter-spacing:1px;clip-path:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px)}
+#p6 .td small{font-family:'Noto Sans SC',sans-serif;font-size:12.5px;font-weight:400;letter-spacing:0;color:var(--sub);margin-top:5px}
+#p6 .td.red{background:rgba(239,68,68,.16);border:1px solid #ef4444;color:#f87171;box-shadow:0 0 22px rgba(239,68,68,.25)}
+#p6 .td.green{background:rgba(0,255,170,.14);border:1px solid var(--green);color:var(--green);box-shadow:0 0 22px rgba(0,255,170,.3)}
+#p6 .td.blue{background:rgba(46,124,246,.16);border:1px solid var(--blue);color:#7cb0ff;box-shadow:0 0 22px rgba(46,124,246,.3)}
+#p6 .cycle{display:inline-block;font-size:34px;color:var(--green);text-shadow:0 0 14px rgba(0,255,170,.7);margin:0 10px}
+#p6 svg.iloop{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+#p6 .iloop-tag{position:absolute;left:50%;top:172px;transform:translateX(-50%);padding:2px 10px;font-family:'Orbitron',sans-serif;font-size:11.5px;letter-spacing:2px;color:var(--cyan);border:1px solid rgba(0,229,255,.4);background:rgba(0,20,14,.7);border-radius:2px;z-index:2}
+#p6 .inote{position:absolute;bottom:10px;left:0;width:100%;text-align:center;font-size:13.5px;color:var(--txt)}
 #p6 .inote b{color:var(--green)}
 #p6 .quote{position:absolute;top:862px;left:0;width:100%;text-align:center;font-size:24px;color:#fff}
 #p6 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
-
 /* ============ P7 四步 ============ */
 #p7 .flow{position:absolute;top:200px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:26px}
 #p7 .row{width:1500px;display:flex;align-items:flex-start;gap:30px}
@@ -421,39 +422,66 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
     <div class="quote">通用底座自带五大子系统，<span class="em">3 项加强让它从「万用」变「专属」</span></div>
   </section>
 
-<!-- P6 双层嵌套（内外套娃） -->
+<!-- P6 双层循环（大环套小环） -->
   <section class="slide" id="p6">
     <div class="ptitle"><h2>核心流程 · 双层嵌套运转模型</h2><div class="gline"></div></div>
     <div class="outer">
       <div class="olab">外层 · OpenSpec 生命周期</div>
-      <div class="chain">
-        <div class="ch opt">explore<small>探索 · 可选</small></div><span class="arrow">→</span>
-        <div class="ch">proposal<small>提案</small></div><span class="arrow">→</span>
-        <div class="ch">specs<small>规格说明</small></div><span class="arrow">→</span>
-        <div class="ch">design<small>设计</small></div><span class="arrow">→</span>
-        <div class="ch">tasks<small>任务拆解</small></div><span class="arrow">→</span>
-        <div class="ch hot">apply<small>应用变更</small></div><span class="arrow">→</span>
-        <div class="ch">archive<small>归档</small></div>
-      </div>
+      <svg class="loop" viewBox="0 0 1700 640" preserveAspectRatio="none">
+        <defs>
+          <marker id="p6arr" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="13" markerHeight="13" orient="auto">
+            <path d="M2 2 L10 6 L2 10 Z" fill="#00e5ff"/>
+          </marker>
+        </defs>
+        <path d="M 370 528 A 590 235 0 0 1 750 120" fill="none" stroke="#00ffaa" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#p6arr)" opacity=".9"/>
+      </svg>
+      <div class="ch opt" style="left:760px;top:68px">explore<small>探索 · 可选</small></div>
+      <div class="ch" style="left:1200px;top:160px">proposal<small>提案</small></div>
+      <div class="ch" style="left:1350px;top:303px">specs<small>规格说明</small></div>
+      <div class="ch" style="left:1200px;top:446px">design<small>设计</small></div>
+      <div class="ch" style="left:940px;top:520px">tasks<small>任务拆解</small></div>
+      <div class="ch hot" style="left:760px;top:538px">apply<small>应用变更</small></div>
+      <div class="ch" style="left:170px;top:303px">archive<small>归档</small></div>
+      <div class="link" style="left:850px;top:97px;width:449px;transform:rotate(11.8deg)"></div>
+      <div class="lkarr" style="left:1070px;top:143px;transform:rotate(11.8deg)">▶</div>
+      <div class="link" style="left:1290px;top:189px;width:207px;transform:rotate(43.6deg)"></div>
+      <div class="lkarr" style="left:1352px;top:245px;transform:rotate(43.6deg)">▶</div>
+      <div class="link" style="left:1440px;top:332px;width:207px;transform:rotate(136.4deg)"></div>
+      <div class="lkarr" style="left:1368px;top:388px;transform:rotate(136.4deg)">▶</div>
+      <div class="link" style="left:1290px;top:475px;width:270px;transform:rotate(164.1deg)"></div>
+      <div class="lkarr" style="left:1168px;top:500px;transform:rotate(164.1deg)">▶</div>
+      <div class="link" style="left:1030px;top:549px;width:181px;transform:rotate(174.3deg)"></div>
+      <div class="lkarr" style="left:942px;top:546px;transform:rotate(174.3deg)">▶</div>
+      <div class="link" style="left:850px;top:567px;width:635px;transform:rotate(-158.3deg)"></div>
+      <div class="lkarr" style="left:532px;top:436px;transform:rotate(-158.3deg)">▶</div>
+      <div class="loop-tag">↻ 循环往复</div>
       <div class="dropv"></div>
-      <div class="droph"></div>
       <div class="drop-tag">apply 内部</div>
       <div class="inner">
-        <div class="ilab">内层 · TDD 循环 <i>apply 内部</i></div>
+        <div class="ilab">内层 · TDD 循环</div>
         <div class="tdd">
           <div class="td red">RED<small>编写失败测试</small></div>
           <span class="cycle">→</span>
-          <div class="td green">GREEN<small>编写代码使测试通过</small></div>
+          <div class="td green">GREEN<small>让测试通过</small></div>
           <span class="cycle">→</span>
-          <div class="td blue">REFACTOR<small>重构并做回归测试</small></div>
+          <div class="td blue">REFACTOR<small>重构回归</small></div>
         </div>
+        <svg class="iloop" viewBox="0 0 720 260" preserveAspectRatio="none">
+          <defs>
+            <marker id="p6arr2" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="13" markerHeight="13" orient="auto">
+              <path d="M2 2 L10 6 L2 10 Z" fill="#00ffaa"/>
+            </marker>
+          </defs>
+          <path d="M 550 158 Q 360 205 135 158" fill="none" stroke="#00ffaa" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#p6arr2)"/>
+        </svg>
+        <div class="iloop-tag">↻ 下一轮</div>
         <div class="inote">每个原子任务独立执行：<b>编写失败测试</b> → <b>编写代码使测试通过</b> → <b>重构并做回归测试</b></div>
       </div>
     </div>
     <div class="quote">💡 OpenSpec 管流程，<span class="em">TDD（Test Driven Development）管质量</span></div>
   </section>
 
-  <!-- P7 四步 -->
+<!-- P7 四步 -->
   <section class="slide" id="p7">
     <div class="ptitle"><h2>4 步搭建专属 Harness</h2><div class="gline"></div></div>
     <div class="flow">
