@@ -72,7 +72,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p2 .reign path{stroke:var(--green);stroke-width:5;fill:none;stroke-linecap:round;filter:drop-shadow(0 0 10px rgba(0,255,170,.7));stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 2.6s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 #p2 .tick{position:absolute;width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px var(--cyan)}
-#p2 .quote{position:absolute;bottom:88px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
+#p2 .quote{position:absolute;bottom:56px;left:0;width:100%;text-align:center;font-size:24px;color:#fff}
 #p2 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P3 三大痛点 ============ */
 #p3 .cards{position:absolute;top:250px;left:0;width:100%;display:flex;justify-content:center;gap:56px}
@@ -83,7 +83,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p3 .pc .q{font-size:22px;line-height:1.75;color:var(--txt);text-align:center;padding:20px;border-left:3px solid var(--line);background:rgba(122,145,180,.06);font-style:italic}
 #p3 .pc .ess{margin-top:30px;text-align:center}
 #p3 .pc .ess .tag{border-color:rgba(0,255,170,.4);color:var(--green)}
-#p3 .quote{position:absolute;bottom:96px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
+#p3 .quote{position:absolute;bottom:56px;left:0;width:100%;text-align:center;font-size:24px;color:#fff}
 #p3 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 #p3 .pc:nth-child(1) .q{border-left-color:var(--green);background:rgba(0,255,170,.06)}
 #p3 .pc:nth-child(2) .q{border-left-color:var(--violet);background:rgba(139,92,246,.08)}
@@ -116,8 +116,8 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p4 .s5card.c3 .s5line{background:linear-gradient(90deg,transparent,var(--green),transparent)}
 #p4 .s5card.c4 .s5line{background:linear-gradient(90deg,transparent,var(--violet),transparent)}
 #p4 .s5card.c5 .s5line{background:linear-gradient(90deg,transparent,var(--amber),transparent)}
-#p4 .note{position:absolute;bottom:96px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
-#p4 .note em{font-style:normal;color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
+#p4 .quote{position:absolute;bottom:56px;left:0;width:100%;text-align:center;font-size:24px;color:#fff}
+#p4 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P5 通用→专属 Harness 演化（合并页 v2：通用 5 子系统齐备） ============ */
 /* ============ P5 从通用底座到专属 Harness（纵向三段流） ============ */
 #p5 .evo{position:absolute;top:172px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:18px}
@@ -171,7 +171,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .result .ric{font-size:42px;filter:drop-shadow(0 0 24px rgba(255,193,7,.8))}
 #p5 .result .rtxt{text-align:center}
 #p5 .result h3{font-family:'Orbitron',sans-serif;font-size:23px;letter-spacing:4px;color:var(--green);margin:0;text-shadow:0 0 20px rgba(0,255,170,.45)}
-#p5 .quote{position:absolute;bottom:88px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
+#p5 .quote{position:absolute;bottom:56px;left:0;width:100%;text-align:center;font-size:24px;color:#fff}
 #p5 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P6 双层嵌套（上下） ============ */
 #p6 .halfup{position:absolute;top:190px;left:0;width:100%;height:400px}
@@ -262,7 +262,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <span class="tick" style="left:50%;bottom:5%"></span>
       </div>
     </div>
-    <div class="quote">Harness 不是让模型更聪明，而是让模型<span class="em">更懂得工作</span></div>
+    <div class="quote">💡 Harness 不是让模型更聪明，而是让模型<span class="em">更懂得工作</span></div>
   </section>
 
   <!-- P3 三大痛点 -->
@@ -326,7 +326,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <div class="s5ex">test · regression</div>
       </div>
     </div>
-    <div class="note">五个子系统<em>并行协作</em>，共同构成完整 Harness</div>
+    <div class="quote">💡 五个子系统<span class="em">并行协作</span>，共同构成完整 Harness</div>
   </section>
 
   <!-- P5 通用→专属 Harness 演化（合并页 v2） -->
@@ -396,7 +396,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         </div>
       </div>
     </div>
-    <div class="quote">通用底座自带五大子系统，<span class="em">3 项加强让它从「万用」变「专属」</span></div>
+    <div class="quote">💡 通用底座自带五大子系统，<span class="em">3 项加强让它从「万用」变「专属」</span></div>
   </section>
 
 <!-- P6 双层嵌套（上下） -->
