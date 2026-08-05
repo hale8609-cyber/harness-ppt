@@ -174,20 +174,20 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .quote{position:absolute;bottom:56px;left:0;width:100%;text-align:center;font-size:24px;color:#fff}
 #p5 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P6 双层嵌套（上下） ============ */
-#p6 .halfup{position:absolute;top:200px;left:0;width:100%;height:400px}
+#p6 .halfup{position:absolute;top:200px;left:0;width:100%;height:420px}
 #p6 .hlab{text-align:center;font-family:'Orbitron',sans-serif;font-size:16px;letter-spacing:5px;color:var(--cyan);margin-bottom:26px}
 #p6 .olab{font-size:22px}
 #p6 .ilab{font-size:18px}
 #p6 .chain{display:flex;flex-direction:column;align-items:center;gap:12px}
 #p6 .crow{display:flex;justify-content:center;align-items:center;gap:0}
-#p6 .vdown{font-size:36px;line-height:1;color:var(--green);text-shadow:0 0 12px rgba(0,255,170,.6)}
+#p6 .backarc{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
 #p6 .ch{width:196px;height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;font-size:20px;font-weight:700;color:var(--txt);background:var(--card);border:1px solid var(--line);clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}#p6 .ch small{font-size:12px;font-weight:500;opacity:.72;letter-spacing:1px}
 #p6 .ch.hot{background:linear-gradient(120deg,rgba(0,255,170,.25),rgba(0,229,255,.15));border-color:var(--green);color:#fff;box-shadow:0 0 30px rgba(0,255,170,.35)}
 #p6 .ch.opt{border-style:dashed;color:var(--sub)}
 #p6 .arrow{width:54px;text-align:center;color:var(--green);font-size:26px;font-weight:700;text-shadow:0 0 12px rgba(0,255,170,.6)}
-#p6 .connector{position:absolute;left:0;width:100%;top:500px;text-align:center}
+#p6 .connector{position:absolute;left:0;width:100%;top:590px;text-align:center}
 #p6 .apply-tag{display:inline-block;padding:6px 22px;font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:3px;color:#03120c;background:var(--green);font-weight:700;border-radius:2px;box-shadow:0 0 26px rgba(0,255,170,.6)}
-#p6 .halfdown{position:absolute;top:550px;left:0;width:100%;height:340px}
+#p6 .halfdown{position:absolute;top:640px;left:0;width:100%;height:340px}
 #p6 .tdd{display:flex;justify-content:center;align-items:center;gap:30px}
 #p6 .td{width:250px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-weight:900;font-size:30px;letter-spacing:3px;clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
 #p6 .td.red{background:rgba(239,68,68,.16);border:1px solid #ef4444;color:#f87171;box-shadow:0 0 26px rgba(239,68,68,.25)}
@@ -414,7 +414,11 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
           <div class="ch">specs<small>规格说明</small></div><span class="arrow">→</span>
           <div class="ch">design<small>设计</small></div>
         </div>
-        <span class="vdown">↓</span>
+        <svg class="backarc" viewBox="0 0 1600 420" preserveAspectRatio="none">
+          <path d="M 1175 158 C 1175 250, 660 255, 560 192" stroke="#00e5ff" stroke-width="3" stroke-dasharray="8 6" fill="none" stroke-linecap="round"/>
+          <polygon points="552,182 570,190 553,198" fill="#00e5ff"/>
+          <text x="850" y="255" fill="#00e5ff" font-size="20" text-anchor="middle" opacity="0.95">↻ 回流迭代</text>
+        </svg>
         <div class="crow">
           <div class="ch">tasks<small>任务拆解</small></div><span class="arrow">→</span>
           <div class="ch hot">apply<small>应用变更</small></div><span class="arrow">→</span>
