@@ -99,9 +99,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p4 .s5role{font-size:24px;font-weight:700;color:#fff;letter-spacing:1px}
 #p4 .s5role b{font-style:normal}
 #p4 .s5desc{margin-top:14px;font-size:14.5px;line-height:1.8;color:var(--sub);text-align:center}
-#p4 .s5ex{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.5px;line-height:1.7;color:var(--dim);text-align:center}
-#p4 .s5tag{margin-top:auto;font-family:'Orbitron',sans-serif;font-size:12.5px;letter-spacing:2px;padding:7px 16px;border:1px solid rgba(0,255,170,.45);color:var(--green);background:rgba(0,255,170,.08)}
-#p4 .s5tag.base{border-color:rgba(122,145,180,.5);color:#93B4DC;background:rgba(122,145,180,.1)}
+#p4 .s5ex{margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.5px;line-height:1.7;color:var(--dim);text-align:center}
 /* accent per card */
 #p4 .s5card.c1 .s5num,#p4 .s5card.c1 .s5en,#p4 .s5card.c1 .s5role b{color:var(--cyan)}
 #p4 .s5card.c2 .s5num,#p4 .s5card.c2 .s5en,#p4 .s5card.c2 .s5role b{color:var(--blue)}
@@ -299,7 +297,6 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <div class="s5role">管 <b>「做什么」</b></div>
         <div class="s5desc">系统提示词与工作流规范，<br>约束 AI 的行为边界与输出格式</div>
         <div class="s5ex">system prompt · 工作流规范</div>
-        <div class="s5tag base">⚙ 基础能力</div>
       </div>
       <div class="s5card c2">
         <div class="s5num">02</div>
@@ -309,7 +306,6 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <div class="s5role">管 <b>「用什么」</b></div>
         <div class="s5desc">终端、编译器、测试框架，<br>让 AI 拥有可执行的能力</div>
         <div class="s5ex">terminal · compiler · test</div>
-        <div class="s5tag base">⚙ 基础能力</div>
       </div>
       <div class="s5card c3">
         <div class="s5num">03</div>
@@ -318,8 +314,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <div class="s5line"></div>
         <div class="s5role">管 <b>「懂什么」</b></div>
         <div class="s5desc">术语表、代码结构、架构知识，<br>让 AI 真正懂你的项目</div>
-        <div class="s5ex">project-glossary · project-knowledge</div>
-        <div class="s5tag">✅ 解决「自由发挥」</div>
+        <div class="s5ex">glossary · architecture</div>
       </div>
       <div class="s5card c4">
         <div class="s5num">04</div>
@@ -328,8 +323,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <div class="s5line"></div>
         <div class="s5role">管 <b>「记什么」</b></div>
         <div class="s5desc">记录干到哪一步、改了什么，<br>全程可追溯</div>
-        <div class="s5ex">OpenSpec Change 管理 · task breakdown</div>
-        <div class="s5tag">✅ 解决「来回折腾」</div>
+        <div class="s5ex">change log · task list</div>
       </div>
       <div class="s5card c5">
         <div class="s5num">05</div>
@@ -338,8 +332,7 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
         <div class="s5line"></div>
         <div class="s5role">管 <b>「判什么」</b></div>
         <div class="s5desc">测试验证，<br>判定「是否完成」的唯一依据</div>
-        <div class="s5ex">TDD · test · regression</div>
-        <div class="s5tag">✅ 解决「说了不算」</div>
+        <div class="s5ex">test · regression</div>
       </div>
     </div>
     <div class="note">五个子系统<em>并行协作</em>，共同构成完整 Harness</div>
