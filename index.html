@@ -120,11 +120,11 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p4 .note em{font-style:normal;color:var(--cyan);font-weight:700;text-shadow:0 0 18px rgba(0,229,255,.5)}
 /* ============ P5 通用→专属 Harness 演化（合并页 v2：通用 5 子系统齐备） ============ */
 /* ============ P5 从通用底座到专属 Harness（纵向三段流） ============ */
-#p5 .evo{position:absolute;top:184px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
-#p5 .phlab{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:700;letter-spacing:4px;color:var(--cyan);text-align:center;margin-bottom:6px;text-shadow:0 0 14px rgba(0,229,255,.5)}
-#p5 .pharrow{flex:0 0 auto;width:100%;text-align:center;font-family:'Orbitron',sans-serif;font-size:25px;font-weight:900;line-height:1;color:var(--green);text-shadow:0 0 18px rgba(0,255,170,.7);margin:-6px 0}
+#p5 .evo{position:absolute;top:176px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:10px}
+#p5 .phlab{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:700;letter-spacing:4px;color:var(--cyan);text-align:center;margin-bottom:3px;text-shadow:0 0 14px rgba(0,229,255,.5)}
+#p5 .pharrow{flex:0 0 auto;width:100%;text-align:center;font-family:'Orbitron',sans-serif;font-size:25px;font-weight:900;line-height:1;color:var(--green);text-shadow:0 0 18px rgba(0,255,170,.7);margin:-9px 0}
 /* STEP 1 通用底座：全宽横条 + 5 列子系统 */
-#p5 .tools{width:1800px;padding:13px 28px 15px;display:flex;flex-direction:column;gap:12px}
+#p5 .tools{width:1800px;padding:10px 28px 12px;display:flex;flex-direction:column;gap:8px}
 #p5 .gtool{clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
 #p5 .gh{display:flex;align-items:center;justify-content:center;gap:22px}
 #p5 .gh .gname{display:flex;align-items:center;gap:11px}
@@ -132,8 +132,8 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .gh .gname .cp{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:700;letter-spacing:1.5px;color:#fff}
 #p5 .gh .gname .and{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:400;color:var(--dim);margin:0 3px}
 #p5 .gh .role{font-family:'Orbitron',sans-serif;font-size:12.5px;letter-spacing:3px;color:var(--dim);border-left:1px solid rgba(122,145,180,.4);padding-left:16px}
-#p5 .subcols{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-#p5 .scol{display:flex;flex-direction:column;gap:6px;padding:11px 16px;background:rgba(0,229,255,.035);border:1px solid rgba(0,229,255,.12);border-top:3px solid var(--cyan)}
+#p5 .subcols{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+#p5 .scol{display:flex;flex-direction:column;gap:4px;padding:9px 14px;background:rgba(0,229,255,.035);border:1px solid rgba(0,229,255,.12);border-top:3px solid var(--cyan)}
 #p5 .scol .sic{font-size:25px;line-height:1}
 #p5 .scol .sname{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;letter-spacing:2px}
 #p5 .scol .sf{font-size:16px;line-height:1.4;color:var(--sub)}
@@ -143,12 +143,12 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .scol.s4{border-top-color:var(--violet)}#p5 .scol.s4 .sname{color:var(--violet)}
 #p5 .scol.s5{border-top-color:var(--amber)}#p5 .scol.s5 .sname{color:var(--amber)}
 /* STEP 2 做了什么 → 加强了什么：三行全宽三块式 */
-#p5 .upg{width:1800px;display:flex;flex-direction:column;gap:9px}
-#p5 .upgrow{display:flex;align-items:stretch;gap:14px}
+#p5 .upg{width:1800px;display:flex;flex-direction:column;gap:6px}
+#p5 .upgrow{display:flex;align-items:stretch;gap:10px}
 #p5 .upgrow .stepno{flex:0 0 56px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:27px;font-weight:900;letter-spacing:1px}
 #p5 .upgrow .cell{flex:1;display:flex;align-items:center;gap:16px;padding:9px 20px;border-radius:10px;border:1px solid var(--line);background:rgba(0,229,255,.045)}
 #p5 .upgrow .cell .cico{font-size:26px;line-height:1;flex:0 0 auto}
-#p5 .upgrow .cell .clab{font-family:'Orbitron',sans-serif;font-size:11.5px;letter-spacing:2.5px;color:var(--dim);margin-bottom:3px}
+#p5 .upgrow .cell .clab{font-family:'Orbitron',sans-serif;font-size:11.5px;letter-spacing:2.5px;color:rgba(255,255,255,.7);margin-bottom:3px}
 #p5 .upgrow .cell b{font-size:18px;line-height:1.4;font-weight:700}
 #p5 .upgrow .cell .fix-sub{font-size:14px;color:var(--sub);margin-top:2px;letter-spacing:.5px}
 #p5 .upgrow .arr{flex:0 0 40px;align-self:center;text-align:center;font-size:27px;font-weight:700;color:var(--green);text-shadow:0 0 12px rgba(0,255,170,.5)}
@@ -168,10 +168,14 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
 #p5 .upgrow.r3 .cell.c{background:rgba(255,194,75,.10);border-color:rgba(255,194,75,.55);border-left:5px solid var(--amber)}
 #p5 .upgrow.r3 .cell.c b{color:var(--amber)}
 /* STEP 3 专属成果：全宽横幅 */
-#p5 .result{width:1800px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 30px;border-color:rgba(0,255,170,.4);clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
-#p5 .result .ric{font-size:50px;filter:drop-shadow(0 0 22px rgba(0,255,170,.7))}
+#p5 .result{width:1800px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:8px 26px;border-color:rgba(0,255,170,.4);clip-path:polygon(18px 0,100% 0,100% calc(100% - 18px),calc(100% - 18px) 100%,0 100%,0 18px)}
+#p5 .result .ric{font-size:40px;filter:drop-shadow(0 0 22px rgba(0,255,170,.7))}
 #p5 .result .rtxt{text-align:center}
 #p5 .result h3{font-family:'Orbitron',sans-serif;font-size:26px;letter-spacing:4px;color:var(--green);margin:0;text-shadow:0 0 20px rgba(0,255,170,.45)}
+#p5 .result .all5sub{font-size:17px;color:var(--sub);letter-spacing:3px;text-align:center;margin-bottom:4px}
+#p5 .result .subtags{display:flex;gap:18px;font-size:14.5px;letter-spacing:2px;text-align:center;margin-bottom:6px}
+#p5 .result .subtags .stc{color:var(--cyan)}#p5 .result .subtags .stt{color:var(--blue)}#p5 .result .subtags .ste{color:var(--green)}#p5 .result .subtags .sts{color:var(--violet)}#p5 .result .subtags .stf{color:var(--amber)}
+#p5 .result .formula{font-family:'Orbitron',sans-serif;font-size:18px;letter-spacing:3px;color:var(--cyan);text-align:center;margin-top:5px;text-shadow:0 0 14px rgba(0,229,255,.4)}
 #p5 .quote{position:absolute;bottom:42px;left:0;width:100%;text-align:center;font-size:26px;color:#fff}
 #p5 .quote .em{color:var(--green);text-shadow:0 0 20px rgba(0,255,170,.6)}
 /* ============ P6 双层嵌套（上下） ============ */
@@ -390,10 +394,13 @@ html,body{background:#02040a;overflow:hidden;font-family:'Noto Sans SC',sans-ser
       <div class="phase">
         <div class="phlab">STEP 3 · 专属成果</div>
         <div class="result card">
+          <div class="all5sub">五个子系统 · 全部就位</div>
+          <div class="subtags"><span class="stc">指令</span><span class="stt">工具</span><span class="ste">环境</span><span class="sts">状态</span><span class="stf">反馈</span></div>
           <span class="ric">🏆</span>
           <div class="rtxt">
             <h3>项目级专属 Harness</h3>
           </div>
+          <div class="formula">通用 Harness + 3 项加强 = 专属</div>
         </div>
       </div>
     </div>
